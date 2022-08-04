@@ -3,13 +3,11 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Http\Controllers\Controller;
-
 use {{ namespacedRequests }}
 
 use {{ namespacedModel }};
 
-class {{ class }} extends Controller
+class {{ class }}
 {
     /**
      * Display a listing of the resource.
