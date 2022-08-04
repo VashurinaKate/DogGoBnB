@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+    mysql:
+        image: mysql:latest
+        container_name: dog_go_bnb-db
+        working_dir: /var/www/dog-go-bnb
+        volumes:
+            - ./:/var/www/dog-go-bnb
+            - mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_ALLOW_EMPTY_PASSWORD: 0
+        ports:
+            - "${CUSTOM_DB_PORT:-3306}:3306"
+        restart: unless-stopped
+
+    nginx:
+        image: nginx:stable-alpine
+        container_name: dog_go_bnb-nginx
+        working_dir: /var/www/dog-go-bnb
+        volumes:
+            - ./:/var/www/dog-go-bnb
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - "${CUSTOM_NGINX_PORT:-80}:80"
+        depends_on:
+            - php
+        restart: unless-stopped
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+            args:
+                DOCKER_USER_ID: ${DOCKER_USER_ID}
+                DOCKER_GROUP_ID: ${DOCKER_GROUP_ID}
+        container_name: dog_go_bnb-php
+        working_dir: /var/www/dog-go-bnb
+        volumes:
+            - ./:/var/www/dog-go-bnb
+            - ./docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/docker-php-ext-overrides.ini
+        depends_on:
+            - mysql
+        restart: unless-stopped
+
+networks:
+    default:
+
+volumes:
+    mysql:
