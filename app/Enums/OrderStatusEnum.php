@@ -11,7 +11,7 @@ enum OrderStatusEnum: int
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::CANCELED => 'Отменён',
             self::OPENED => 'Открыт',
             self::ACCEPTED => 'Принят',

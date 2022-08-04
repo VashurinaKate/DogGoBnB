@@ -74,6 +74,6 @@ class User extends Authenticatable
             'animal_recipient',
             'recipient_id',
             'animal_id',
-        )->withPivot('size', 'amount');
+        )->withPivot(['amount', 'size']);
     }
 }

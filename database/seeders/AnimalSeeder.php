@@ -21,7 +21,7 @@ class AnimalSeeder extends Seeder
      * @return void
      */
 
-    public function run()
+    public function run(): void
     {
         Animal::query()->upsert(
             $this->animals,

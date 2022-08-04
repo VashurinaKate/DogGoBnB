@@ -10,7 +10,7 @@ enum AnimalSizeEnum: int
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::SMALL => 'Маленький',
             self::MEDIUM => 'Средний',
             self::LARGE => 'Большой',

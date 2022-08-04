@@ -37,6 +37,6 @@ class Animal extends Model
             'animal_recipient',
             'animal_id',
             'recipient_id',
-        )->withPivot('size', 'amount');
+        )->withPivot(['amount', 'size']);
     }
 }
