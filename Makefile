@@ -65,6 +65,10 @@ db-seed:
 db-fresh:
 	docker-compose exec php php artisan migrate:fresh
 
+# Fresh all migrations with seeds
+db-fresh:
+	docker-compose exec php php artisan migrate:fresh --seed
+
 #-----------------------------------------------------------
 # Installation
 #-----------------------------------------------------------
