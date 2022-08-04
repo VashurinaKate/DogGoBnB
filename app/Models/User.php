@@ -71,9 +71,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(
             Animal::class,
-            foreignPivotKey: 'recipient_id',
-            relatedPivotKey: 'animal_id',
-        )
-            ->withPivot('size', 'amount');
+            'animal_recipient',
+            'recipient_id',
+            'animal_id',
+        )->withPivot('size', 'amount');
     }
 }
