@@ -1,0 +1,68 @@
+<?php
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+
+use {{ namespacedRequests }}
+
+use {{ namespacedModel }};
+
+class {{ class }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(): \Illuminate\Http\JsonResponse
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \{{ namespacedStoreRequest }}  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store({{ storeRequest }} $request): \Illuminate\Http\JsonResponse
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show({{ model }} ${{ modelVariable }}): \Illuminate\Http\JsonResponse
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \{{ namespacedUpdateRequest }}  $request
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }}): \Illuminate\Http\JsonResponse
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy({{ model }} ${{ modelVariable }}): \Illuminate\Http\JsonResponse
+    {
+        //
+    }
+}
