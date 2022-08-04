@@ -11,7 +11,6 @@
 ## Easiest way for setup:
 - Set your local **UID** and **GID** in `.env.example`
 - Use `make init` command for build ***docker app*** in one command!
-- Reset **DOCKER_BUILDING** variable from `.env.example`
 - Reset **UID** and **GID** from `.env.example`
 #### For open container's bash add `--user=www-datah` flag
 
