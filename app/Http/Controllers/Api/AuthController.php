@@ -18,6 +18,11 @@ class AuthController extends Controller
 {
     public function __construct(public ResponseContract $json) {}
 
+    /**
+     * @param \App\Http\Requests\Api\AuthRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(AuthRequest $request)
     {
         $user = User::create($request->validated());
@@ -28,7 +33,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @param AuthRequest $request
+     * @param \App\Http\Requests\Api\AuthRequest $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
