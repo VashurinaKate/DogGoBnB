@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
         $fileSystem = new Filesystem();
         $files = $fileSystem->files(base_path('routes/api'));
 
-        if (! empty($files) && is_array($files)) {
+        if (!empty($files) && is_array($files)) {
             foreach ($files as $file) {
                 Route::prefix('api')
                     ->middleware('api')

@@ -14,7 +14,7 @@ abstract class BaseApiRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     abstract public function rules(): array;
 

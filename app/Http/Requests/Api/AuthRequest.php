@@ -6,9 +6,7 @@ namespace App\Http\Requests\Api;
 class AuthRequest extends BaseApiRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
+     * @inheritdoc
      */
     public function authorize(): bool
     {
@@ -16,9 +14,7 @@ class AuthRequest extends BaseApiRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @inheritdoc
      */
     public function rules(): array
     {
@@ -26,7 +22,7 @@ class AuthRequest extends BaseApiRequest
             'email' => ['required', 'string', 'email:rfc,dns'],
             'password' => ['required', 'string', 'min:6'],
         ];
-        if ($this->routeIs('register')) {
+        if ($this->routeIs('auth.register')) {
             $rules = [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email:rfc,dns', 'unique:users,email'],
