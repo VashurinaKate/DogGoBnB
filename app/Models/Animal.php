@@ -32,6 +32,6 @@ class Animal extends Model
      */
     public function recipients(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('amount', 'size');
+        return $this->belongsToMany(User::class)->withPivot('size', 'amount');
     }
 }
