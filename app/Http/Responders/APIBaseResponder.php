@@ -9,7 +9,7 @@ use App\Contracts\ResponseContract;
 
 class APIBaseResponder implements ResponseContract
 {
-    /** @var array|string[] $headers */
+    /** @var array<string, string> $headers */
     private array $headers = ['Content-Type' => 'application/json; charset=UTF-8', 'charset' => 'utf-8'];
 
     /**
