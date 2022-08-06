@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AnimalSeeder::class,
             OrderSeeder::class,
+            AnimalOrderSeeder::class,
+            AnimalRecipientSeeder::class,
         ]);
     }
 }
