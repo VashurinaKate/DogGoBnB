@@ -17,10 +17,6 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        Order::factory()
-            ->count(1)
-//            ->for(Animal::factory())
-            ->hasAttached(Animal::factory())
-            ->create();
+        Order::factory()->count(35)->create();
     }
 }

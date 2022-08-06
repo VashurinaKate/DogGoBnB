@@ -9,14 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AnimalFactory extends Factory
 {
-    protected array $animals = [
-        'Кошка',
-        'Собака',
-        'Попугай',
-        'Тритон',
-        'Лягушка',
-    ];
-
     /**
      * Define the model's default state.
      *
@@ -25,7 +17,7 @@ class AnimalFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->randomElement($this->animals),
+            // 'name' => fake()->name,
         ];
     }
 }

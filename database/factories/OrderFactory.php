@@ -17,8 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'owner_id' => fake()->numberBetween(1, 30),
-            'recipient_id' => fake()->numberBetween(1, 30),
+            'owner_id' => \App\Models\User::factory(),
+            'recipient_id' => \App\Models\User::factory(),
             'comment' => fake()->text(250),
             'status' => fake()->numberBetween(-1, 2),
             'start_date' => fake()->dateTimeBetween('now', '+5 months'),
