@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Animal;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class AnimalSeeder extends Seeder
@@ -20,13 +22,8 @@ class AnimalSeeder extends Seeder
      *
      * @return void
      */
-
     public function run(): void
     {
-        Animal::query()->upsert(
-            $this->animals,
-            ['name'],
-            ['name'],
-        );
+        Animal::query()->upsert($this->animals, ['name'], ['name']);
     }
 }
