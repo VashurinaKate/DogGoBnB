@@ -121,7 +121,7 @@ class AuthController
         }
 
         return $this->json->response([
-            'token' => Auth::user()->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken
         ]);
     }
 
