@@ -115,7 +115,8 @@ class AuthController
      */
     public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
-        if (!Auth::attempt($request->validated())) {
+        $user = User::firstWhere('email', $request->input('email'));
+        if (!$user && \Hash::check($request->input('password'), $user->password)) {
             return $this->json->response([], 'Credentials not match', JsonResponse::HTTP_UNAUTHORIZED);
         }
 
