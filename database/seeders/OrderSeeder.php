@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Animal;
+use Illuminate\Database\Seeder;
+
 use App\Models\Order;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
 {
@@ -17,6 +17,14 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        Order::factory()->count(35)->create();
+        $users = User::all();
+
+        Order::factory()
+            ->afterMaking(function (Order $order) use ($users) {
+                $order->owner()->associate($users->random());
+                $order->recipient()->associate($users->random());
+            })
+            ->count(35)
+            ->create();
     }
 }

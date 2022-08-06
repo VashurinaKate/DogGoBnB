@@ -13,15 +13,13 @@ class AnimalRecipientSeeder extends Seeder
 {
     public function run()
     {
-        User::factory()
-            ->hasAttached(
-                Animal::factory(3),
-                [
-                    'amount' => rand(1, 3),
-                    'size' => collect(AnimalSizeEnum::cases())->pluck('value')->random(),
-                ]
-            )
-            ->count(5)
-            ->create();
+        $animals = Animal::all();
+
+        User::all()->each(function ($user) use ($animals) {
+            $user->animals()->syncWithPivotValues($animals->take(rand(1, 3)), [
+                'amount' => rand(1, 3),
+                'size' => collect(AnimalSizeEnum::cases())->pluck('value')->random(),
+            ]);
+        });
     }
 }

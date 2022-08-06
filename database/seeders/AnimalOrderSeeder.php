@@ -11,9 +11,10 @@ class AnimalOrderSeeder extends Seeder
 {
     public function run()
     {
-        Order::factory()
-            ->has(Animal::factory(2))
-            ->count(10)
-            ->create();
+        $animals = Animal::all();
+
+        Order::all()->each(function ($order) use ($animals) {
+            $order->animals()->sync($animals->take(rand(1, 3)));
+        });
     }
 }
