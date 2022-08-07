@@ -83,7 +83,7 @@ class OrderController
         }
         $order->update($request->validated());
 
-        return $this->json->response([
+        return $this->json->response(data: [
             'order' => OrderResource::make($order->load(['owner', 'recipient'])),
         ]);
     }
@@ -97,7 +97,11 @@ class OrderController
      */
     public function destroy(Order $order): \Illuminate\Http\JsonResponse
     {
-        $order->delete();
+        try {
+            $order->delete();
+        } catch (\Throwable $e) {
+            return $this->json->error(message: $e->getMessage());
+        }
 
         return $this->json->response(
             data: [],

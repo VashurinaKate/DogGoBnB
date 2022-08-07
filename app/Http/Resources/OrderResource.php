@@ -3,9 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Enums\OrderStatusEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Enums\OrderStatusEnum;
+
+/**
+ * @mixin \App\Models\Order
+ */
 class OrderResource extends JsonResource
 {
     /**
@@ -13,7 +17,7 @@ class OrderResource extends JsonResource
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array
      */
     public function toArray($request): array
     {

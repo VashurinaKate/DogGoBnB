@@ -3,16 +3,21 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Enums\RoleEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Enums\RoleEnum;
+
+/**
+ * @mixin \App\Models\User
+ */
 class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
      */
     public function toArray($request): array
     {
