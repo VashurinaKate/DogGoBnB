@@ -14,7 +14,7 @@ class AnimalOrderSeeder extends Seeder
         $animals = Animal::all();
 
         Order::all()->each(function ($order) use ($animals) {
-            $order->animals()->sync($animals->take(rand(1, 3)));
+            $order->animals()->sync($animals->shuffle()->take(rand(1, 3)));
         });
     }
 }

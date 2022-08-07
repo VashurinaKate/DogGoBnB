@@ -16,7 +16,7 @@ class AnimalRecipientSeeder extends Seeder
         $animals = Animal::all();
 
         User::all()->each(function ($user) use ($animals) {
-            $user->animals()->syncWithPivotValues($animals->take(rand(1, 3)), [
+            $user->animals()->syncWithPivotValues($animals->shuffle()->take(rand(1, 3)), [
                 'amount' => rand(1, 3),
                 'size' => collect(AnimalSizeEnum::cases())->pluck('value')->random(),
             ]);
