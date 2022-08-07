@@ -15,7 +15,8 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->index()->constrained('users');
-            $table->foreignId('recipient_id')->constrained('users');
+            $table->unsignedBigInteger('recipient_id')->nullable();
+            $table->foreign('recipient_id')->references('id')->on('users');
             $table->string('comment', 1000)->nullable();
             $table->tinyInteger('status')->nullable();
             $table->timestamp('start_date');
