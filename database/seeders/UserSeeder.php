@@ -18,8 +18,9 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Kate',
             'email' => 'kate@gmail.com',
+            'phone' => '+79201234567',
             'email_verified_at' => now(),
-            'password' => \Hash::make('kate@gmail.com'),
+            'password' => 'kate@gmail.com',
             'role' => 10,
         ]);
 

@@ -19,13 +19,14 @@ class AuthRequest extends BaseApiRequest
     public function rules(): array
     {
         $rules = [
-            'email' => ['required', 'string', 'email:rfc,dns'],
+            'phone' => ['required', 'string'],
             'password' => ['required', 'string', 'min:6'],
         ];
         if ($this->routeIs('auth.register')) {
             $rules = [
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email:rfc,dns', 'unique:users,email'],
+                'phone' => ['required', 'string', 'max:12', 'unique:users,phone'],
+                'email' => ['string', 'email:rfc,dns', 'unique:users,email'],
                 'password' => ['required', 'string', 'min:6', 'confirmed'],
             ];
         }

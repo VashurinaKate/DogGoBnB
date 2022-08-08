@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RoleEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'role',
         'password',
     ];
@@ -58,8 +61,19 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::make(
-            set: static fn($value) => Hash::make((string) $value, [PASSWORD_DEFAULT])
+            get: static fn($value) => $value,
+            set: static fn($value) => Hash::make((string) $value, [PASSWORD_DEFAULT]),
         );
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRecipientRole(Builder $query): \Illuminate\Database\Eloquent\Builder
+    {
+        return $query->where('role', RoleEnum::RECIPIENT->value);
     }
 
     /**

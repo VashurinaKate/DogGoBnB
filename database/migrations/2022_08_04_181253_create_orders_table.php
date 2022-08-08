@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('recipient_id')->nullable();
             $table->foreign('recipient_id')->references('id')->on('users');
             $table->string('comment', 1000)->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->nullable()->default(OrderStatusEnum::OPENED->value);
             $table->timestamp('start_date');
             $table->timestamp('end_date');
             $table->softDeletes();
