@@ -204,4 +204,35 @@ class OrderController
             message: 'Заказ удален',
         );
     }
+
+    /**
+     * @param \App\Models\Order $order
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function acceptOrder(Order $order): \Illuminate\Http\JsonResponse
+    {
+        $order->acceptOrder()->save();
+        $order->recipient()->associate(Auth::user());
+
+        return $this->json->response(
+            data: [],
+            message: 'Заказ принят'
+        );
+    }
+
+    /**
+     * @param \App\Models\Order $order
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function rejectOrder(Order $order): \Illuminate\Http\JsonResponse
+    {
+        $order->recipient()->disassociate();
+
+        return $this->json->response(
+            data: [],
+            message: 'Заказ отклонен'
+        );
+    }
 }

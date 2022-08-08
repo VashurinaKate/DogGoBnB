@@ -39,6 +39,12 @@ class AuthController
      *                     example="example@gmail.com"
      *                 ),
      *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     description="User's phone number",
+     *                     example="+79201234567"
+     *                 ),
+     *                 @OA\Property(
      *                     property="password",
      *                     type="string",
      *                     description="Password",
@@ -86,10 +92,10 @@ class AuthController
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="email",
+     *                     property="phone",
      *                     type="string",
-     *                     description="Email address",
-     *                     example="example@gmail.com"
+     *                     description="User's phone number",
+     *                     example="+79201234567"
      *                 ),
      *                 @OA\Property(
      *                     property="password",
@@ -115,8 +121,8 @@ class AuthController
      */
     public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
-        $user = User::firstWhere('email', $request->input('email'));
-        if (!$user || \Hash::check($request->input('password'), $user->password)) {
+        $user = User::firstWhere('phone', $request->input('phone'));
+        if (!$user && \Hash::check($request->input('password'), $user->password)) {
             return $this->json->response([], 'Credentials not match', JsonResponse::HTTP_UNAUTHORIZED);
         }
 
