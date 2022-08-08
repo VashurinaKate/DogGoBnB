@@ -18,6 +18,19 @@ class OrderController
     }
 
     /**
+     * @OA\Get(
+     *     path="/orders",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="orders",
+     *     tags={"Orders"},
+     *     summary="Get orders list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderResource"),
+     *     )
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -32,6 +45,25 @@ class OrderController
     }
 
     /**
+     * @OA\Post(
+     *     path="/orders",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="orders store",
+     *     tags={"Orders"},
+     *     summary="Orders store",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/OrderSaveRequest"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderResource"),
+     *     )
+     * )
+     *
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\Api\OrderSaveRequest $request
@@ -51,6 +83,26 @@ class OrderController
     }
 
     /**
+     * @OA\Get(
+     *     path="/orders/{id}",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="orders show",
+     *     tags={"Orders"},
+     *     summary="Show order by ID",
+     *     @OA\Parameter(
+     *         description="Order ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderResource"),
+     *     )
+     * )
+     *
      * Display the specified resource.
      *
      * @param \App\Models\Order $order
@@ -65,6 +117,31 @@ class OrderController
     }
 
     /**
+     * @OA\Put(
+     *     path="/orders/{id}",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="orders update",
+     *     tags={"Orders"},
+     *     summary="Orders update",
+     *     @OA\Parameter(
+     *         description="Order ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/OrderSaveRequest"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/OrderResource"),
+     *     )
+     * )
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\Api\OrderSaveRequest $request
@@ -89,6 +166,25 @@ class OrderController
     }
 
     /**
+     * @OA\Delete(
+     *     path="/orders/{id}",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="orders delete",
+     *     tags={"Orders"},
+     *     summary="Orders delete",
+     *     @OA\Parameter(
+     *         description="Order ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *     )
+     * )
+     *
      * Remove the specified resource from storage.
      *
      * @param \App\Models\Order $order

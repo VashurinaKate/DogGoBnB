@@ -16,6 +16,32 @@ class AnimalController
     }
 
     /**
+     * @OA\Get(
+     *     path="/animals",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="animals",
+     *     tags={"Animals"},
+     *     summary="Get animals list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="id",
+     *                 type="integer",
+     *                 description="Animal id",
+     *                 example="1"
+     *             ),
+     *             @OA\Property(
+     *                 property="name",
+     *                 type="string",
+     *                 description="Type of animal",
+     *                 example="Кошка"
+     *             ),
+     *         ),
+     *     ),
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -36,7 +62,7 @@ class AnimalController
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -48,7 +74,7 @@ class AnimalController
      */
     public function show(Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -61,7 +87,7 @@ class AnimalController
      */
     public function update(Request $request, Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -73,6 +99,6 @@ class AnimalController
      */
     public function destroy(Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 }
