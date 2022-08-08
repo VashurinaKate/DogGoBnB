@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Enums\OrderStatusEnum;
 
 class Order extends Model
 {
@@ -28,14 +29,20 @@ class Order extends Model
         'deleted_at',
     ];
 
-    public function acceptOrder()
+    /**
+     * @return $this
+     */
+    public function acceptOrder(): static
     {
         $this->status = OrderStatusEnum::ACCEPTED->value;
 
         return $this;
     }
 
-    public function openOrder()
+    /**
+     * @return $this
+     */
+    public function openOrder(): static
     {
         $this->status = OrderStatusEnum::OPENED->value;
 

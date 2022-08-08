@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Contracts\ResponseContract;
-use App\Enums\OrderStatusEnum;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\Api\OrderSaveRequest;
 use App\Http\Resources\OrderResource;
 
+use App\Enums\OrderStatusEnum;
+
+use App\Contracts\ResponseContract;
+
 use App\Models\Order;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController
 {

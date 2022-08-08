@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+
+use App\Enums\RoleEnum;
 
 class User extends Authenticatable
 {
@@ -52,7 +53,7 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
-    
+
     /**
      * Always encrypt password when it is updated.
      *

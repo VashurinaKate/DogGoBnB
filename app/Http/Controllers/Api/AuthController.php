@@ -14,7 +14,9 @@ use App\Models\User;
 
 class AuthController
 {
-    public function __construct(public ResponseContract $json) {}
+    public function __construct(public ResponseContract $json)
+    {
+    }
 
     /**
      * @OA\Post(
@@ -77,7 +79,7 @@ class AuthController
         $user = User::create($request->validated());
 
         return $this->json->response([
-            'token' => $user->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken,
         ]);
     }
 
@@ -127,7 +129,7 @@ class AuthController
         }
 
         return $this->json->response([
-            'token' => $user->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken,
         ]);
     }
 
