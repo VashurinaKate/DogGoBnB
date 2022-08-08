@@ -12,6 +12,46 @@
     ],
     "paths": {
         "/api/v1": {},
+        "/animals": {
+            "get": {
+                "tags": [
+                    "Animals"
+                ],
+                "summary": "Get animals list",
+                "operationId": "animals",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "Animal id",
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "description": "Type of animal",
+                                            "type": "string",
+                                            "example": "Кошка"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
         "/register": {
             "post": {
                 "tags": [
@@ -162,6 +202,212 @@
                     }
                 ]
             }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get orders list",
+                "operationId": "orders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Orders store",
+                "operationId": "orders store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Show order by ID",
+                "operationId": "orders show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Orders update",
+                "operationId": "orders update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Orders delete",
+                "operationId": "orders delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get users list",
+                "operationId": "users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -176,6 +422,97 @@
                         "type": "null"
                     },
                     "data": {}
+                },
+                "type": "object"
+            },
+            "OrderSaveRequest": {
+                "properties": {
+                    "comment": {
+                        "description": "Order comment",
+                        "type": "string",
+                        "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
+                    },
+                    "start_date": {
+                        "description": "Order start date",
+                        "type": "string",
+                        "example": "2022-12-01 16:56:21"
+                    },
+                    "end_date": {
+                        "description": "Order end date",
+                        "type": "string",
+                        "example": "2022-09-07 20:56:28"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderResource": {
+                "properties": {
+                    "id": {
+                        "description": "Order id",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "owner": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "recipient": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "comment": {
+                        "description": "Order comment",
+                        "type": "string",
+                        "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
+                    },
+                    "status": {
+                        "description": "Order status",
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "status_label": {
+                        "description": "Order status label",
+                        "type": "string",
+                        "example": "Открыт"
+                    },
+                    "start_date": {
+                        "description": "Order start date",
+                        "type": "string",
+                        "example": "2022-12-01 16:56:21"
+                    },
+                    "end_date": {
+                        "description": "Order end date",
+                        "type": "string",
+                        "example": "2022-09-07 20:56:28"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "properties": {
+                    "id": {
+                        "description": "User id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "description": "User name",
+                        "type": "string",
+                        "example": "Jessica Brown"
+                    },
+                    "email": {
+                        "description": "Email address",
+                        "type": "string",
+                        "example": "example@example.ru"
+                    },
+                    "role": {
+                        "description": "User role index",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "role_label": {
+                        "description": "User role label",
+                        "type": "string",
+                        "example": "Владелец"
+                    }
                 },
                 "type": "object"
             }

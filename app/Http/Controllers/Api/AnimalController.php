@@ -16,6 +16,32 @@ class AnimalController
     }
 
     /**
+     * @OA\Get(
+     *     path="/animals",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="animals",
+     *     tags={"Animals"},
+     *     summary="Get animals list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(
+     *                 property="id",
+     *                 type="integer",
+     *                 description="Animal id",
+     *                 example="1"
+     *             ),
+     *             @OA\Property(
+     *                 property="name",
+     *                 type="string",
+     *                 description="Type of animal",
+     *                 example="Кошка"
+     *             ),
+     *         ),
+     *     ),
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
