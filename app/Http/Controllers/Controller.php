@@ -16,12 +16,6 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="PMO server",
  *     url="http://localhost/api/v1"
  * )
- * @OA\SecurityScheme(
- *     type="http",
- *     in="header",
- *     name="Bearer",
- *     securityScheme="bearer_token"
- * )
  * @OA\PathItem(path="/api/v1")
  *
  * @OA\Schema(

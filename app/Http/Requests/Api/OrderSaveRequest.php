@@ -28,7 +28,6 @@ use Illuminate\Validation\Rule;
  *         example="2022-09-07 20:56:28"
  *      ),
  * )
- *
  */
 class OrderSaveRequest extends BaseApiRequest
 {

@@ -70,6 +70,12 @@ db-fresh-seed:
 	docker-compose exec php php artisan migrate:fresh --seed
 
 #-----------------------------------------------------------
+# Project commands
+#-----------------------------------------------------------
+docs-gen:
+	docker-compose exec php php artisan l5-swagger:generate
+
+#-----------------------------------------------------------
 # Installation
 #-----------------------------------------------------------
 

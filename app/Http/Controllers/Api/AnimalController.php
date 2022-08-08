@@ -62,7 +62,7 @@ class AnimalController
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -74,7 +74,7 @@ class AnimalController
      */
     public function show(Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -87,7 +87,7 @@ class AnimalController
      */
     public function update(Request $request, Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
@@ -99,6 +99,6 @@ class AnimalController
      */
     public function destroy(Animal $animal): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 }
