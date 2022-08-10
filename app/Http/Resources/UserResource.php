@@ -10,19 +10,6 @@ use App\Enums\RoleEnum;
 /**
  * @mixin \App\Models\User
  *
- * @OA\Get(
- *     path="/users",
- *     security={{ "sanctum": {"*"} }},
- *     operationId="users",
- *     tags={"Users"},
- *     summary="Get users list",
- *     @OA\Response(
- *         response=200,
- *         description="OK",
- *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
- *     )
- * ),
- *
  * @OA\Schema(
  *     schema="UserResource",
  *     type="object",
@@ -43,6 +30,12 @@ use App\Enums\RoleEnum;
  *         type="string",
  *         description="Email address",
  *         example="example@example.ru"
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="string",
+ *         description="User's phone number",
+ *         example="+79201234567"
  *     ),
  *     @OA\Property(
  *         property="role",
@@ -73,6 +66,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'phone' => $this->phone,
             'role' => $this->role,
             'role_label' => RoleEnum::from($this->role)->label(),
         ];

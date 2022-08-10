@@ -74,6 +74,11 @@
                                         "type": "string",
                                         "example": "example@gmail.com"
                                     },
+                                    "phone": {
+                                        "description": "User's phone number",
+                                        "type": "string",
+                                        "example": "+79201234567"
+                                    },
                                     "password": {
                                         "description": "Password",
                                         "type": "string",
@@ -121,10 +126,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "email": {
-                                        "description": "Email address",
+                                    "phone": {
+                                        "description": "User's phone number",
                                         "type": "string",
-                                        "example": "example@gmail.com"
+                                        "example": "+79201234567"
                                     },
                                     "password": {
                                         "description": "Password",
@@ -380,34 +385,6 @@
                     }
                 ]
             }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get users list",
-                "operationId": "users",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UserResource"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": [
-                            "*"
-                        ]
-                    }
-                ]
-            }
         }
     },
     "components": {
@@ -502,6 +479,11 @@
                         "description": "Email address",
                         "type": "string",
                         "example": "example@example.ru"
+                    },
+                    "phone": {
+                        "description": "User's phone number",
+                        "type": "string",
+                        "example": "+79201234567"
                     },
                     "role": {
                         "description": "User role index",

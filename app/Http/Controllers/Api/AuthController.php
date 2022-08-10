@@ -14,7 +14,9 @@ use App\Models\User;
 
 class AuthController
 {
-    public function __construct(public ResponseContract $json) {}
+    public function __construct(public ResponseContract $json)
+    {
+    }
 
     /**
      * @OA\Post(
@@ -37,6 +39,12 @@ class AuthController
      *                     type="string",
      *                     description="Email address",
      *                     example="example@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     description="User's phone number",
+     *                     example="+79201234567"
      *                 ),
      *                 @OA\Property(
      *                     property="password",
@@ -71,7 +79,7 @@ class AuthController
         $user = User::create($request->validated());
 
         return $this->json->response([
-            'token' => $user->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken,
         ]);
     }
 
@@ -86,10 +94,10 @@ class AuthController
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 @OA\Property(
-     *                     property="email",
+     *                     property="phone",
      *                     type="string",
-     *                     description="Email address",
-     *                     example="example@gmail.com"
+     *                     description="User's phone number",
+     *                     example="+79201234567"
      *                 ),
      *                 @OA\Property(
      *                     property="password",
@@ -115,13 +123,13 @@ class AuthController
      */
     public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
-        $user = User::firstWhere('email', $request->input('email'));
-        if (!$user || \Hash::check($request->input('password'), $user->password)) {
+        $user = User::firstWhere('phone', $request->input('phone'));
+        if (!$user && \Hash::check($request->input('password'), $user->password)) {
             return $this->json->response([], 'Credentials not match', JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         return $this->json->response([
-            'token' => $user->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken,
         ]);
     }
 
