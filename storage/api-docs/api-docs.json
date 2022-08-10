@@ -518,9 +518,10 @@
             }
         },
         "securitySchemes": {
-            "bearer_token": {
-                "type": "http",
-                "name": "Bearer",
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
                 "in": "header"
             }
         }

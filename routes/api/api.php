@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\Api\AnimalController;
 use \App\Http\Controllers\Api\OrderController;
-
+use \App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,6 +22,10 @@ use \App\Http\Controllers\Api\OrderController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResources([
+    'sitter' => UserController::class, 
+]);
 
 Route::group([
     'prefix' => 'v1',

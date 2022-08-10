@@ -21,6 +21,9 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => \Hash::make('kate@gmail.com'),
             'role' => 10,
+            'description' => 'dfdfgdfgdfgdfgнгенгенгенгрпопропропропропропро',
+            'locations' => 1,
+            'phone' =>4567896446
         ]);
 
         User::factory()->count(30)->create();
