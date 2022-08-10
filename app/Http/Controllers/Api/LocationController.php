@@ -23,52 +23,58 @@ class LocationController
     public function index(): \Illuminate\Http\JsonResponse
     {
         return $this->json->response([
-            'cities' => Location::all()
+            'cities' => Location::all(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Location  $location
+     * @param \App\Models\Location $location
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(Location $location): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([
+            'location' => $location->load(['users']),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Location  $location
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Location $location
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Location $location): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Location  $location
+     * @param \App\Models\Location $location
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Location $location): \Illuminate\Http\JsonResponse
     {
-        //
+        return $this->json->response([]);
     }
 }
