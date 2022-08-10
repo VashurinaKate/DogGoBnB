@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             AnimalOrderSeeder::class,
             AnimalRecipientSeeder::class,
+            LocationSeeder::class,
+            LocationUserSeeder::class,
         ]);
     }
 }

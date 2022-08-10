@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => 'kate@gmail.com',
             'role' => 10,
+            'description' => 'Top 1 developer',
         ]);
 
         User::factory()->count(30)->create();

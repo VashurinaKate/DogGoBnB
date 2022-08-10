@@ -5,8 +5,9 @@ use App\Http\Middleware\CheckOrderBelongsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use \App\Http\Controllers\Api\AnimalController;
-use \App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\{
+    AnimalController, OrderController, UserController, LocationController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,11 @@ Route::group([
     'middleware' => 'auth:sanctum',
 ], function () {
     Route::get('animals', [AnimalController::class, 'index']);
-    Route::apiResource('orders', OrderController::class)->only(['index', 'store']);
-    Route::apiResource('orders', OrderController::class)->except(['index', 'store'])
+    Route::apiResource('orders', OrderController::class)
+        ->only(['index', 'store']);
+    Route::apiResource('orders', OrderController::class)
+        ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
+    Route::apiResource('recipients', UserController::class);
+    Route::apiResource('locations', LocationController::class);
 });

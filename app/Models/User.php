@@ -28,6 +28,8 @@ class User extends Authenticatable
         'phone',
         'role',
         'password',
+        'description',
+        'phone'
     ];
 
     /**
@@ -104,5 +106,13 @@ class User extends Authenticatable
             'recipient_id',
             'animal_id',
         )->withPivot(['amount', 'size']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function locations(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Location::class);
     }
 }
