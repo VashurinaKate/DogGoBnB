@@ -69,6 +69,7 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'role' => $this->role,
             'role_label' => RoleEnum::from($this->role)->label(),
+            'locations' => $this->whenLoaded('locations'),
         ];
     }
 }

@@ -24,8 +24,6 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => $this->faker->numberBetween(0, 2),
             'description' => fake()->text(100),
-            'locations' => rand(1, 5),
-            'phone' =>fake()->PhoneNumber(),
         ];
     }
 

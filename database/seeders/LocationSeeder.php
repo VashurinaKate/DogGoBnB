@@ -2,17 +2,19 @@
 declare(strict_types=1);
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Database\Seeder;
+
+use App\Models\Location;
 
 class LocationSeeder extends Seeder
 {
     protected array $cities = [
-        ['name' => 'Москва'],
-        ['name' => 'Санкт-Петербург'],
-        ['name' => 'Вологда'],
-        ['name' => 'Ярославль'],
-        ['name' => 'Сочи'],
+        ['city' => 'Москва'],
+        ['city' => 'Санкт-Петербург'],
+        ['city' => 'Вологда'],
+        ['city' => 'Ярославль'],
+        ['city' => 'Сочи'],
     ];
     /**
      * Run the database seeds.
@@ -21,6 +23,6 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('city')->insert($this->cities, ['name'], ['name']);
+        Location::upsert($this->cities, ['city'], ['city']);
     }
 }

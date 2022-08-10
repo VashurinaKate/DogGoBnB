@@ -21,8 +21,6 @@ return new class extends Migration {
             $table->string('password');
             $table->tinyInteger('role')->default(\App\Enums\RoleEnum::GUEST->value);
             $table->string('description');
-            $table->tinyInteger('locations');
-            $table->string('phone')->unique();
             $table->timestamps();
         });
     }

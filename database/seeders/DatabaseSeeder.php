@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AnimalOrderSeeder::class,
             AnimalRecipientSeeder::class,
             LocationSeeder::class,
+            LocationUserSeeder::class,
         ]);
     }
 }
