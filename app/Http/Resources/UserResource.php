@@ -6,6 +6,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Enums\RoleEnum;
+use OpenApi\Annotations as OA;
 
 /**
  * @mixin \App\Models\User

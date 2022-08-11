@@ -13,62 +13,53 @@ use App\Enums\OrderStatusEnum;
  *
  * @OA\Schema(
  *     schema="OrderResource",
- *     oneOf={
- *         @OA\Schema(
- *             type="object",
- *             @OA\Property(
- *                 property="owner",
- *                 ref="#/components/schemas/UserResource"
- *             ),
+ *     type="array",
+ *     @OA\Items(
+ *         @OA\Property(
+ *             property="id",
+ *             type="integer",
+ *             description="Order id",
+ *             example="1"
  *         ),
- *         @OA\Schema(
- *             type="object",
- *             @OA\Property(
- *                 property="owner",
- *                 ref="#/components/schemas/UserResource"
- *             ),
- *             @OA\Property(
- *                 property="recipient",
- *                 ref="#/components/schemas/UserResource"
- *             ),
+ *         @OA\Property(
+ *             property="owner",
+ *             ref="#/components/schemas/UserResource"
  *         ),
- *     },
- *     @OA\Property(
- *         property="id",
- *         type="integer",
- *         description="Order id",
- *         example="1"
+ *         @OA\Property(
+ *             property="recipient",
+ *             ref="#/components/schemas/UserResource"
+ *         ),
+ *         @OA\Property(
+ *             property="comment",
+ *             type="string",
+ *             description="Order comment",
+ *             example="Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
+ *         ),
+ *         @OA\Property(
+ *             property="status",
+ *             type="string",
+ *             description="Order status",
+ *             example="1"
+ *         ),
+ *         @OA\Property(
+ *             property="status_label",
+ *             type="string",
+ *             description="Order status label",
+ *             example="Открыт"
+ *         ),
+ *         @OA\Property(
+ *             property="start_date",
+ *             type="string",
+ *             description="Order start date",
+ *             example="2022-12-01 16:56:21"
+ *         ),
+ *         @OA\Property(
+ *             property="end_date",
+ *             type="string",
+ *             description="Order end date",
+ *             example="2022-09-07 20:56:28"
+ *          ),
  *     ),
- *     @OA\Property(
- *         property="comment",
- *         type="string",
- *         description="Order comment",
- *         example="Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
- *     ),
- *     @OA\Property(
- *         property="status",
- *         type="string",
- *         description="Order status",
- *         example="1"
- *      ),
- *      @OA\Property(
- *          property="status_label",
- *          type="string",
- *          description="Order status label",
- *          example="Открыт"
- *      ),
- *      @OA\Property(
- *          property="start_date",
- *          type="string",
- *          description="Order start date",
- *          example="2022-12-01 16:56:21"
- *      ),
- *      @OA\Property(
- *          property="end_date",
- *          type="string",
- *          description="Order end date",
- *          example="2022-09-07 20:56:28"
- *       ),
  * )
  */
 class OrderResource extends JsonResource

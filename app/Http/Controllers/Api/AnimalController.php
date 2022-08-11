@@ -27,17 +27,20 @@ class AnimalController
      *         response=200,
      *         description="OK",
      *         @OA\JsonContent(
-     *             @OA\Property(
-     *                 property="id",
-     *                 type="integer",
-     *                 description="Animal id",
-     *                 example="1"
-     *             ),
-     *             @OA\Property(
-     *                 property="name",
-     *                 type="string",
-     *                 description="Type of animal",
-     *                 example="Кошка"
+     *             type="array",
+     *             @OA\Items(
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="integer",
+     *                     description="Animal id",
+     *                     example="1"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string",
+     *                     description="Type of animal",
+     *                     example="Кошка"
+     *                 ),
      *             ),
      *         ),
      *     ),

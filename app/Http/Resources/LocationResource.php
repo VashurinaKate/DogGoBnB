@@ -4,29 +4,18 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Annotations as OA;
 
 /**
  * @mixin \App\Models\Location
  *
  * @OA\Schema(
  *     schema="LocationResource",
- *     type="object",
- *     @OA\Property(
- *         property="id",
- *         type="integer",
- *         description="Location id",
- *         example="1"
- *     ),
- *     @OA\Property(
- *         property="city",
- *         type="string",
- *         description="City",
- *         example="Москва"
- *     ),
- *     @OA\Property(
- *         property="user",
- *         ref="#/components/schemas/UserResource"
- *     ),
+ *     type="array",
+ *     @OA\Items(
+ *         @OA\Property(property="id", type="integer", example="1"),
+ *         @OA\Property(property="city", type="string", example="Москва"),
+ *     )
  * )
  */
 class LocationResource extends JsonResource
