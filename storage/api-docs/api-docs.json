@@ -208,6 +208,34 @@
                 ]
             }
         },
+        "/locations": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get locations list",
+                "operationId": "locations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
         "/orders": {
             "get": {
                 "tags": [
@@ -404,6 +432,11 @@
             },
             "OrderSaveRequest": {
                 "properties": {
+                    "recipient_id": {
+                        "description": "Recipient ID",
+                        "type": "integer",
+                        "example": "3"
+                    },
                     "comment": {
                         "description": "Order comment",
                         "type": "string",
@@ -422,11 +455,29 @@
                 },
                 "type": "object"
             },
+            "LocationResource": {
+                "properties": {
+                    "id": {
+                        "description": "Location id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "city": {
+                        "description": "City",
+                        "type": "string",
+                        "example": "Москва"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    }
+                },
+                "type": "object"
+            },
             "OrderResource": {
                 "properties": {
                     "id": {
                         "description": "Order id",
-                        "type": "string",
+                        "type": "integer",
                         "example": "1"
                     },
                     "owner": {

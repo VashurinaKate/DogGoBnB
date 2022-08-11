@@ -15,7 +15,7 @@ use App\Enums\OrderStatusEnum;
  *     type="object",
  *     @OA\Property(
  *         property="id",
- *         type="string",
+ *         type="integer",
  *         description="Order id",
  *         example="1"
  *     ),
