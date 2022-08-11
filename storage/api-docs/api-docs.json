@@ -426,7 +426,10 @@
                     "errors": {
                         "type": "null"
                     },
-                    "data": {}
+                    "data": {
+                        "type": "array",
+                        "items": {}
+                    }
                 },
                 "type": "object"
             },
@@ -480,12 +483,6 @@
                         "type": "integer",
                         "example": "1"
                     },
-                    "owner": {
-                        "$ref": "#/components/schemas/UserResource"
-                    },
-                    "recipient": {
-                        "$ref": "#/components/schemas/UserResource"
-                    },
                     "comment": {
                         "description": "Order comment",
                         "type": "string",
@@ -512,7 +509,28 @@
                         "example": "2022-09-07 20:56:28"
                     }
                 },
-                "type": "object"
+                "type": "object",
+                "oneOf": [
+                    {
+                        "properties": {
+                            "owner": {
+                                "$ref": "#/components/schemas/UserResource"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "owner": {
+                                "$ref": "#/components/schemas/UserResource"
+                            },
+                            "recipient": {
+                                "$ref": "#/components/schemas/UserResource"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
             },
             "UserResource": {
                 "properties": {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Annotations as OA;
 
 use App\Enums\OrderStatusEnum;
 
@@ -12,20 +13,31 @@ use App\Enums\OrderStatusEnum;
  *
  * @OA\Schema(
  *     schema="OrderResource",
- *     type="object",
+ *     oneOf={
+ *         @OA\Schema(
+ *             type="object",
+ *             @OA\Property(
+ *                 property="owner",
+ *                 ref="#/components/schemas/UserResource"
+ *             ),
+ *         ),
+ *         @OA\Schema(
+ *             type="object",
+ *             @OA\Property(
+ *                 property="owner",
+ *                 ref="#/components/schemas/UserResource"
+ *             ),
+ *             @OA\Property(
+ *                 property="recipient",
+ *                 ref="#/components/schemas/UserResource"
+ *             ),
+ *         ),
+ *     },
  *     @OA\Property(
  *         property="id",
  *         type="integer",
  *         description="Order id",
  *         example="1"
- *     ),
- *     @OA\Property(
- *         property="owner",
- *         ref="#/components/schemas/UserResource"
- *     ),
- *     @OA\Property(
- *         property="recipient",
- *         ref="#/components/schemas/UserResource"
  *     ),
  *     @OA\Property(
  *         property="comment",
