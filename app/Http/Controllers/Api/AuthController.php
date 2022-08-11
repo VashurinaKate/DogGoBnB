@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use OpenApi\Annotations as OA;
 
 use App\Http\Requests\Api\AuthRequest;
 

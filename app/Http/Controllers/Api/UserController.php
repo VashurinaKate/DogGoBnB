@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
+
 use App\Contracts\ResponseContract;
 
 use App\Http\Resources\UserResource;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController
 {
