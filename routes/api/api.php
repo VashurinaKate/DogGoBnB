@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckOrderBelongsUser;
 
+use App\Http\Middleware\TransformUserIndexRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::group([
     Route::apiResource('orders', OrderController::class)
         ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
-    Route::apiResource('recipients', UserController::class);
+    Route::apiResource('recipients', UserController::class)
+        ->middleware(TransformUserIndexRequest::class);
     Route::apiResource('locations', LocationController::class);
 });

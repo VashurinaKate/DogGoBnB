@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\LocationResource;
 use Illuminate\Http\Request;
 
 use App\Contracts\ResponseContract;
@@ -16,14 +17,28 @@ class LocationController
     }
 
     /**
+     * @OA\Get(
+     *     path="/locations",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="locations",
+     *     tags={"Locations"},
+     *     summary="Get locations list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/LocationResource"),
+     *     )
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        return $this->json->response([
-            'cities' => Location::all(),
+        return $this->json->response(
+            data: [
+            'cities' => LocationResource::collection(Location::all()),
         ]);
     }
 
