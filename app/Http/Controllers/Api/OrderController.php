@@ -158,7 +158,7 @@ class OrderController
             return $this->json->response(
                 data: [],
                 message: 'Уже нельзя обновить заказ',
-                httpSTatusCode: \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY,
+                httpStatusCode: \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY,
             );
         }
         $order->update($request->validated());
