@@ -28,9 +28,7 @@ class UserController
      *     @OA\Response(
      *         response=200,
      *         description="OK",
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/UserResource"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource")
      *     )
      * )
      *
