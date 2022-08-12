@@ -42,9 +42,7 @@ class OrderController
     public function index(): \Illuminate\Http\JsonResponse
     {
         return $this->json->response(data: [
-            'orders' => OrderResource::collection(
-                Order::with(['owner', 'recipient'])->get()
-            ),
+            'orders' => OrderResource::collection(Order::with(['owner', 'recipient'])->get()),
         ]);
     }
 

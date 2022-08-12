@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\LocationResource;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
+
+use App\Http\Resources\LocationResource;
 
 use App\Contracts\ResponseContract;
 
