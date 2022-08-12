@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\ResponseContract;
-
+use OpenApi\Annotations as OA;
 use App\Http\Resources\UserResource;
 
 use App\Models\User;
@@ -16,7 +16,26 @@ class UserController
     {
     }
 
-    /**
+    /**@OA\Get(
+     *     path="/recipients",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="recipients",
+     *     tags={"recipients"},
+     *     summary="Get recipients list",
+     *      @OA\Parameter(
+     *         description="Order ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     * @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
+     *     )
+     * )
+     * 
      * Display a listing of the resource.
      *
      * @param \Illuminate\Http\Request $request

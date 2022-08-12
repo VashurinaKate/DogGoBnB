@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->default(\App\Enums\RoleEnum::GUEST->value);
-            $table->string('description');
+            $table->string('description')->default('');
             $table->timestamps();
         });
     }
