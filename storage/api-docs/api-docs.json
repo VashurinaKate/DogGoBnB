@@ -25,19 +25,22 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "description": "Animal id",
-                                            "type": "integer",
-                                            "example": "1"
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Animal id",
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "description": "Type of animal",
+                                                "type": "string",
+                                                "example": "Кошка"
+                                            }
                                         },
-                                        "name": {
-                                            "description": "Type of animal",
-                                            "type": "string",
-                                            "example": "Кошка"
-                                        }
-                                    },
-                                    "type": "object"
+                                        "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -413,6 +416,34 @@
                     }
                 ]
             }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get users list",
+                "operationId": "users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -459,78 +490,64 @@
                 "type": "object"
             },
             "LocationResource": {
-                "properties": {
-                    "id": {
-                        "description": "Location id",
-                        "type": "integer",
-                        "example": "1"
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "city": {
+                            "type": "string",
+                            "example": "Москва"
+                        }
                     },
-                    "city": {
-                        "description": "City",
-                        "type": "string",
-                        "example": "Москва"
-                    },
-                    "user": {
-                        "$ref": "#/components/schemas/UserResource"
-                    }
-                },
-                "type": "object"
+                    "type": "object"
+                }
             },
             "OrderResource": {
-                "properties": {
-                    "id": {
-                        "description": "Order id",
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "comment": {
-                        "description": "Order comment",
-                        "type": "string",
-                        "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
-                    },
-                    "status": {
-                        "description": "Order status",
-                        "type": "string",
-                        "example": "1"
-                    },
-                    "status_label": {
-                        "description": "Order status label",
-                        "type": "string",
-                        "example": "Открыт"
-                    },
-                    "start_date": {
-                        "description": "Order start date",
-                        "type": "string",
-                        "example": "2022-12-01 16:56:21"
-                    },
-                    "end_date": {
-                        "description": "Order end date",
-                        "type": "string",
-                        "example": "2022-09-07 20:56:28"
-                    }
-                },
-                "type": "object",
-                "oneOf": [
-                    {
-                        "properties": {
-                            "owner": {
-                                "$ref": "#/components/schemas/UserResource"
-                            }
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "description": "Order id",
+                            "type": "integer",
+                            "example": "1"
                         },
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "owner": {
-                                "$ref": "#/components/schemas/UserResource"
-                            },
-                            "recipient": {
-                                "$ref": "#/components/schemas/UserResource"
-                            }
+                        "owner": {
+                            "$ref": "#/components/schemas/UserResource"
                         },
-                        "type": "object"
-                    }
-                ]
+                        "recipient": {
+                            "$ref": "#/components/schemas/UserResource"
+                        },
+                        "comment": {
+                            "description": "Order comment",
+                            "type": "string",
+                            "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
+                        },
+                        "status": {
+                            "description": "Order status",
+                            "type": "string",
+                            "example": "1"
+                        },
+                        "status_label": {
+                            "description": "Order status label",
+                            "type": "string",
+                            "example": "Открыт"
+                        },
+                        "start_date": {
+                            "description": "Order start date",
+                            "type": "string",
+                            "example": "2022-12-01 16:56:21"
+                        },
+                        "end_date": {
+                            "description": "Order end date",
+                            "type": "string",
+                            "example": "2022-09-07 20:56:28"
+                        }
+                    },
+                    "type": "object"
+                }
             },
             "UserResource": {
                 "properties": {

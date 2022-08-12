@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
 use App\Contracts\ResponseContract;
-use OpenApi\Annotations as OA;
+
 use App\Http\Resources\UserResource;
 
 use App\Models\User;
@@ -19,6 +19,20 @@ class UserController
     }
 
     /**
+     * @OA\Get(
+     *     path="/users",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="users",
+     *     tags={"Users"},
+     *     summary="Get users list",
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/UserResource"
+     *         )
+     *     )
+     * )
      * Display a listing of the resource.
      *
      * @param \Illuminate\Http\Request $request
