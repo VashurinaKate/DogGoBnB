@@ -25,19 +25,22 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "description": "Animal id",
-                                            "type": "integer",
-                                            "example": "1"
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Animal id",
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "name": {
+                                                "description": "Type of animal",
+                                                "type": "string",
+                                                "example": "Кошка"
+                                            }
                                         },
-                                        "name": {
-                                            "description": "Type of animal",
-                                            "type": "string",
-                                            "example": "Кошка"
-                                        }
-                                    },
-                                    "type": "object"
+                                        "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -413,6 +416,119 @@
                     }
                 ]
             }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get users list",
+                "operationId": "users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show user profile by ID",
+                "operationId": "user profile show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user profile",
+                "operationId": "update user profile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -458,79 +574,95 @@
                 },
                 "type": "object"
             },
-            "LocationResource": {
+            "UserSaveRequest": {
                 "properties": {
-                    "id": {
-                        "description": "Location id",
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "city": {
-                        "description": "City",
+                    "name": {
+                        "description": "User name",
                         "type": "string",
-                        "example": "Москва"
+                        "example": "Jessica"
                     },
-                    "user": {
-                        "$ref": "#/components/schemas/UserResource"
+                    "email": {
+                        "description": "Email address",
+                        "type": "string",
+                        "example": "ex@ex.ru"
+                    },
+                    "phone": {
+                        "description": "Phone number",
+                        "type": "string",
+                        "example": "+71234567890"
+                    },
+                    "role_label": {
+                        "description": "User role label",
+                        "type": "string",
+                        "example": "Владелец"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "example": "Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
                     }
                 },
                 "type": "object"
             },
+            "LocationResource": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "city": {
+                            "type": "string",
+                            "example": "Москва"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
             "OrderResource": {
-                "properties": {
-                    "id": {
-                        "description": "Order id",
-                        "type": "integer",
-                        "example": "1"
-                    },
-                    "comment": {
-                        "description": "Order comment",
-                        "type": "string",
-                        "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
-                    },
-                    "status": {
-                        "description": "Order status",
-                        "type": "string",
-                        "example": "1"
-                    },
-                    "status_label": {
-                        "description": "Order status label",
-                        "type": "string",
-                        "example": "Открыт"
-                    },
-                    "start_date": {
-                        "description": "Order start date",
-                        "type": "string",
-                        "example": "2022-12-01 16:56:21"
-                    },
-                    "end_date": {
-                        "description": "Order end date",
-                        "type": "string",
-                        "example": "2022-09-07 20:56:28"
-                    }
-                },
-                "type": "object",
-                "oneOf": [
-                    {
-                        "properties": {
-                            "owner": {
-                                "$ref": "#/components/schemas/UserResource"
-                            }
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "description": "Order id",
+                            "type": "integer",
+                            "example": "1"
                         },
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "owner": {
-                                "$ref": "#/components/schemas/UserResource"
-                            },
-                            "recipient": {
-                                "$ref": "#/components/schemas/UserResource"
-                            }
+                        "owner": {
+                            "$ref": "#/components/schemas/UserResource"
                         },
-                        "type": "object"
-                    }
-                ]
+                        "recipient": {
+                            "$ref": "#/components/schemas/UserResource"
+                        },
+                        "comment": {
+                            "description": "Order comment",
+                            "type": "string",
+                            "example": "Оставить кошку с 17.08.22 до 25.08.22. Номер телефона 812345"
+                        },
+                        "status": {
+                            "description": "Order status",
+                            "type": "string",
+                            "example": "1"
+                        },
+                        "status_label": {
+                            "description": "Order status label",
+                            "type": "string",
+                            "example": "Открыт"
+                        },
+                        "start_date": {
+                            "description": "Order start date",
+                            "type": "string",
+                            "example": "2022-12-01 16:56:21"
+                        },
+                        "end_date": {
+                            "description": "Order end date",
+                            "type": "string",
+                            "example": "2022-09-07 20:56:28"
+                        }
+                    },
+                    "type": "object"
+                }
             },
             "UserResource": {
                 "properties": {
@@ -563,6 +695,11 @@
                         "description": "User role label",
                         "type": "string",
                         "example": "Владелец"
+                    },
+                    "description": {
+                        "description": "User description",
+                        "type": "string",
+                        "example": "Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
                     }
                 },
                 "type": "object"
