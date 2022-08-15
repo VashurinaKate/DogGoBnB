@@ -53,9 +53,6 @@ use OpenApi\Annotations as OA;
  */
 class UserSaveRequest extends BaseApiRequest
 {
-    /**
-     * @return array[]
-     */
     public function rules(): array
     {
         $isMethodPost = $this->isMethod('post');
@@ -64,8 +61,7 @@ class UserSaveRequest extends BaseApiRequest
             'name' => [Rule::requiredIf($isMethodPost), 'string', 'max:50'],
             'email' => [Rule::requiredIf($isMethodPost), 'email', 'max:50'],
             'phone' => [Rule::requiredIf($isMethodPost), 'string', 'max:12'],
-            // 'role' => [Rule::requiredIf($isMethodPost), 'integer'], нужно здесь это вообще?
-            // 'role_label' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
+            // 'role' => [Rule::requiredIf($isMethodPost), 'integer'],
             // 'locations' =>
             'description' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
         ];

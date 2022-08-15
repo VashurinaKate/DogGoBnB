@@ -41,9 +41,6 @@ use OpenApi\Annotations as OA;
  */
 class OrderSaveRequest extends BaseApiRequest
 {
-    /**
-     * @return array[]
-     */
     public function rules(): array
     {
         $isMethodPost = $this->isMethod('post');
