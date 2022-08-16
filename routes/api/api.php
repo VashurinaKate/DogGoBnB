@@ -37,6 +37,7 @@ Route::group([
         ->middleware(CheckOrderBelongsUser::class);
     Route::apiResource('recipients', UserController::class)
         ->middleware(TransformUserIndexRequest::class);
+    Route::apiResource('users', UserController::class);
     Route::apiResource('locations', LocationController::class);
 });
 
