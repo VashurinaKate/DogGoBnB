@@ -5,8 +5,11 @@ namespace App\Http\Requests\Api;
 
 use App\Enums\RoleEnum;
 use Illuminate\Validation\Rule;
+use OpenApi\Annotations as OA;
 
 /**
+ * @mixin \App\Models\Order
+ *
  * @OA\Schema(
  *     schema="OrderSaveRequest",
  *     type="object",
@@ -38,9 +41,6 @@ use Illuminate\Validation\Rule;
  */
 class OrderSaveRequest extends BaseApiRequest
 {
-    /**
-     * @inheritdoc
-     */
     public function rules(): array
     {
         $isMethodPost = $this->isMethod('post');

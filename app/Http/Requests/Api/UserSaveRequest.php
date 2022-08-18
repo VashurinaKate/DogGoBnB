@@ -1,42 +1,35 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Resources;
-
-use Illuminate\Http\Resources\Json\JsonResource;
+namespace App\Http\Requests\Api;
 
 use App\Enums\RoleEnum;
+use Illuminate\Validation\Rule;
 use OpenApi\Annotations as OA;
 
 /**
  * @mixin \App\Models\User
  *
  * @OA\Schema(
- *     schema="UserResource",
+ *     schema="UserSaveRequest",
  *     type="object",
- *     @OA\Property(
- *         property="id",
- *         type="integer",
- *         description="User id",
- *         example="1"
- *     ),
  *     @OA\Property(
  *         property="name",
  *         type="string",
  *         description="User name",
- *         example="Jessica Brown"
+ *         example="Jessica"
  *     ),
  *     @OA\Property(
  *         property="email",
  *         type="string",
  *         description="Email address",
- *         example="example@example.ru"
+ *         example="ex@ex.ru"
  *     ),
  *     @OA\Property(
  *         property="phone",
  *         type="string",
- *         description="User's phone number",
- *         example="+79201234567"
+ *         description="Phone number",
+ *         example="+71234567890"
  *     ),
  *     @OA\Property(
  *         property="role",
@@ -53,31 +46,24 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(
  *         property="description",
  *         type="string",
- *         description="User description",
+ *         description="Description",
  *         example="Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
- *     ),
+ *      ),
  * )
  */
-class UserResource extends JsonResource
+class UserSaveRequest extends BaseApiRequest
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array
-     */
-    public function toArray($request): array
+    public function rules(): array
     {
+        $isMethodPost = $this->isMethod('post');
+
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'role' => $this->role,
-            'role_label' => RoleEnum::from($this->role)->label(),
-            'description' => $this->description,
-            'locations' => $this->whenLoaded('locations'),
+            'name' => [Rule::requiredIf($isMethodPost), 'string', 'max:50'],
+            'email' => [Rule::requiredIf($isMethodPost), 'email', 'max:50'],
+            'phone' => [Rule::requiredIf($isMethodPost), 'string', 'max:12'],
+            // 'role' => [Rule::requiredIf($isMethodPost), 'integer'],
+            // 'locations' =>
+            'description' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
         ];
     }
 }

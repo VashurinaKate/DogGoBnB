@@ -77,6 +77,11 @@
                                         "type": "string",
                                         "example": "example@gmail.com"
                                     },
+                                    "phone": {
+                                        "description": "User's phone number",
+                                        "type": "string",
+                                        "example": "+79201234567"
+                                    },
                                     "password": {
                                         "description": "Password",
                                         "type": "string",
@@ -614,6 +619,11 @@
                         "description": "User role label",
                         "type": "string",
                         "example": "Владелец"
+                    },
+                    "description": {
+                        "description": "User description",
+                        "type": "string",
+                        "example": "Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
                     }
                 },
                 "type": "object"
