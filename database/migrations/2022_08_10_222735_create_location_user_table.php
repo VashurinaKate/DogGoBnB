@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('city_location');
+        Schema::dropIfExists('location_user');
     }
 };

@@ -77,11 +77,6 @@
                                         "type": "string",
                                         "example": "example@gmail.com"
                                     },
-                                    "phone": {
-                                        "description": "User's phone number",
-                                        "type": "string",
-                                        "example": "+79201234567"
-                                    },
                                     "password": {
                                         "description": "Password",
                                         "type": "string",
@@ -129,10 +124,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "phone": {
-                                        "description": "User's phone number",
+                                    "email": {
+                                        "description": "Email address",
                                         "type": "string",
-                                        "example": "+79201234567"
+                                        "example": "example@gmail.com"
                                     },
                                     "password": {
                                         "description": "Password",
@@ -424,6 +419,45 @@
                 ],
                 "summary": "Get users list",
                 "operationId": "users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/recipients?filters[city_id]=id": {
+            "get": {
+                "tags": [
+                    "recipients"
+                ],
+                "summary": "Get  recipients filters[city_id]",
+                "operationId": "users show",
+                "parameters": [
+                    {
+                        "name": "filters[city_id]",
+                        "in": "path",
+                        "description": "recipients ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
