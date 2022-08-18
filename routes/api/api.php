@@ -24,6 +24,13 @@ use App\Http\Controllers\Api\{
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group([
+    'prefix' => 'v1',
+], function () {
+    Route::apiResource('recipients', UserController::class)
+        ->middleware(TransformUserIndexRequest::class);
+    Route::apiResource('locations', LocationController::class);
+});
 
 Route::group([
     'prefix' => 'v1',
@@ -35,7 +42,5 @@ Route::group([
     Route::apiResource('orders', OrderController::class)
         ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
-    Route::apiResource('recipients', UserController::class)
-        ->middleware(TransformUserIndexRequest::class);
-    Route::apiResource('locations', LocationController::class);
+     
 });
