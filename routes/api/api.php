@@ -30,6 +30,7 @@ Route::group([
     Route::apiResource('recipients', UserController::class)
         ->middleware(TransformUserIndexRequest::class);
     Route::apiResource('locations', LocationController::class);
+    Route::apiResource('users', UserController::class);
 });
 
 Route::group([
@@ -42,7 +43,6 @@ Route::group([
     Route::apiResource('orders', OrderController::class)
         ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
-    Route::apiResource('users', UserController::class);
 });
 
 Route::get('task1', function() {
