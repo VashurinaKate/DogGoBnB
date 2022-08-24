@@ -69,7 +69,7 @@ class UserController
         if ($filters) {
             $users = User::with('locations')->whereRelation('locations', 'id', $filters['city_id'])->get();
         } else {
-            $users = User::all();
+            $users = User::with('locations')->whereRelation('locations', 'id','>',0)->get();
         }
 
         return $this->json->response(data: [
