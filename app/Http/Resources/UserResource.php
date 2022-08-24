@@ -56,6 +56,12 @@ use OpenApi\Annotations as OA;
  *         description="User description",
  *         example="Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
  *     ),
+ *     @OA\Property(
+ *         property="locations",
+ *         type="string",
+ *         description="User description",
+ *         example="Санкт-Петербург"
+ *     ),
  * )
  */
 class UserResource extends JsonResource
@@ -77,7 +83,9 @@ class UserResource extends JsonResource
             'role' => $this->role,
             'role_label' => RoleEnum::from($this->role)->label(),
             'description' => $this->description,
-            'locations' => $this->whenLoaded('locations'),
+            'locations' => $this->locations[0]->city,
+            
+            // LocationResource::collection( $this->whenLoaded('locations')),
         ];
     }
 }
