@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
-    AnimalController, OrderController, UserController, LocationController
+    AnimalController, 
+    OrderController, 
+    UserController, 
+    LocationController, 
+    ReveiwController
 };
 
 /*
@@ -30,6 +34,7 @@ Route::group([
     Route::apiResource('recipients', UserController::class)
         ->middleware(TransformUserIndexRequest::class);
     Route::apiResource('locations', LocationController::class);
+    Route::apiResource('reviews', ReveiwController::class);
 });
 
 Route::group([

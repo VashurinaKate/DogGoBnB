@@ -412,6 +412,73 @@
                 ]
             }
         },
+        "/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Get reviews list",
+                "operationId": "reviews",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/reviews/{id}": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Show reviews by user ID",
+                "operationId": "reviews profile show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
         "/users": {
             "get": {
                 "tags": [
@@ -703,6 +770,34 @@
                     "type": "object"
                 }
             },
+            "ReviewResource": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "that_id": {
+                            "type": "integer",
+                            "example": "6"
+                        },
+                        "to_whom_id": {
+                            "type": "integer",
+                            "example": "6"
+                        },
+                        "rating": {
+                            "type": "integer",
+                            "example": "5"
+                        },
+                        "comment": {
+                            "type": "string",
+                            "example": "Omnis quidem cum aut suscipit fugit. Beatae nisi ad et aut sint. Eaque et optio amet iure."
+                        }
+                    },
+                    "type": "object"
+                }
+            },
             "UserResource": {
                 "properties": {
                     "id": {
@@ -747,6 +842,18 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ReviewResource"
+                        }
+                    }
+                }
             }
         },
         "securitySchemes": {
