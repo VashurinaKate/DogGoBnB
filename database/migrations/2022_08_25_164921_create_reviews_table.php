@@ -13,10 +13,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('location_user', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Location::class);
-            $table->foreignIdFor(\App\Models\User::class);
-            
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('that_id')->index()->constrained('users');
+            $table->foreignId('to_whom_id')->index()->constrained('users');
+            $table->integer('rating');
+            $table->string('comment');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('location_user');
+        Schema::dropIfExists('reviews');
     }
 };

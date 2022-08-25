@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             AnimalRecipientSeeder::class,
             LocationSeeder::class,
             LocationUserSeeder::class,
+            ReviewSeeder::class,
+            // ReviewUserSeeder::class,
         ]);
     }
 }

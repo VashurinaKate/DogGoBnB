@@ -115,4 +115,22 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Location::class);
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reviewsThat(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Review::class, 'reviews_user', 'id_that', 'review_id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function reviewsWhom(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Review::class, 'reviews_user', 'id_to_whom', 'review_id');
+    }
+    
+
 }
