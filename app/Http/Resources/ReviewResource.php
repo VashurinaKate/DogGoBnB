@@ -34,6 +34,14 @@ class ReviewResource extends JsonResource
      */
     public function toArray($request): array
     {
-        return parent::toArray($request);
+        return [
+            
+            'to_whom_id' => $this->to_whom_id,
+            'rating' => $this->rating,
+            'comment' => $this->comment,
+            
+            
+            // LocationResource::collection( $this->whenLoaded('locations')),
+        ];;
     }
 }

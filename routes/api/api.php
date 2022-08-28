@@ -35,6 +35,7 @@ Route::group([
         ->middleware(TransformUserIndexRequest::class);
     Route::apiResource('locations', LocationController::class);
     Route::apiResource('reviews', ReveiwController::class);
+    
 });
 
 Route::group([
@@ -48,6 +49,8 @@ Route::group([
         ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
     Route::apiResource('users', UserController::class);
+    Route::apiResource('reviewsend', ReveiwController::class);
+    Route::apiResource('reviewsave', ReveiwController::class);
 });
 
 Route::get('task1', function() {

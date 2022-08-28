@@ -117,20 +117,17 @@ class User extends Authenticatable
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reviewsThat(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function reveiwThat(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(Review::class, 'reviews_user', 'id_that', 'review_id');
+        return $this->hasMany(Review::class, 'that_id', 'id');
     }
-    
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reviewsWhom(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function reveiwWhom(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(Review::class, 'reviews_user', 'id_to_whom', 'review_id');
+        return $this->hasMany(Review::class, 'to_whom_id', 'id');
     }
-    
-
 }

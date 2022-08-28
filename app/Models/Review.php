@@ -11,10 +11,10 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
-        
+        'that_id',
+        'to_whom_id',
         'rating',
         'comment',
-        
     ];
 
     protected $hidden = [
@@ -23,13 +23,9 @@ class Review extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(User::class);
-    }
-
+   
     public function reviewsThat(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         
@@ -37,7 +33,7 @@ class Review extends Model
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function reviewsWhom(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

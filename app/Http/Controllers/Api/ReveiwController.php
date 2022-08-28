@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\ReveiwSaveRequest;
 use App\Contracts\ResponseContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use OpenApi\Annotations as OA;
 
 use App\Models\Review;
-
+use App\Http\Resources\ReviewResource;
 class ReveiwController
 {
     public function __construct(public ResponseContract $json)
@@ -54,9 +56,20 @@ class ReveiwController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store(ReveiwSaveRequest $request): \Illuminate\Http\JsonResponse
     {
-        return $this->json->response([]);
+        
+        
+        // $created_reviews = Review::create($request->validated());
+        
+        $review = new Review($request->validated());
+        
+        Auth::user()->reveiwThat()->save($review);
+        return $this->json->response(
+            data: [
+                'reviews' => ReviewResource::make($review)
+                ]
+            );
     }
 
     /**
