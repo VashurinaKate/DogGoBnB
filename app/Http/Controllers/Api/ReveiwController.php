@@ -50,12 +50,49 @@ class ReveiwController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    * @OA\Post(
+    *     path="/reviewsave",
+    *     security={{ "sanctum": {"*"} }},
+    *     operationId="review store",
+    *     tags={"Reviews"},
+    *     summary="reviews store",
+    *     @OA\RequestBody(
+    *         @OA\MediaType(
+    *             mediaType="application/json",
+    *             @OA\Schema(ref="#/components/schemas/ReveiwSaveRequest"),
+    *         ),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *         @OA\JsonContent(
+    *         @OA\Property(
+    *           property="to_whom_id",
+    *           type="integer",
+    *           description="Recipient ID",
+    *           example="3"
+    *         ),
+    *         @OA\Property(
+    *           property="rating",
+    *           type="integer",
+    *           description="rating",
+    *           example="3"
+    *          ),
+    *         @OA\Property(
+    *           property="comment",
+    *           type="string",
+    *           description="comment",
+    *           example="хороший отзыв"
+    *          ),
+    *         ),
+    *     )
+    * )
+    * Store a newly created resource in storage.
+    *
+    * @param \Illuminate\Http\Request $request
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function store(ReveiwSaveRequest $request): \Illuminate\Http\JsonResponse
     {
         

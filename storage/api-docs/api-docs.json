@@ -440,6 +440,60 @@
                 ]
             }
         },
+        "/reviewsave": {
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "reviews store",
+                "operationId": "review store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReveiwSaveRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "to_whom_id": {
+                                            "description": "Recipient ID",
+                                            "type": "integer",
+                                            "example": "3"
+                                        },
+                                        "rating": {
+                                            "description": "rating",
+                                            "type": "integer",
+                                            "example": "3"
+                                        },
+                                        "comment": {
+                                            "description": "comment",
+                                            "type": "string",
+                                            "example": "хороший отзыв"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": [
+                            "*"
+                        ]
+                    }
+                ]
+            }
+        },
         "/reviews/{id}": {
             "get": {
                 "tags": [
@@ -671,6 +725,31 @@
                         "description": "Order end date",
                         "type": "string",
                         "example": "2022-09-07 20:56:28"
+                    }
+                },
+                "type": "object"
+            },
+            "ReveiwSaveRequest": {
+                "properties": {
+                    "that_id": {
+                        "description": "Ыender ID",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "to_whom_id": {
+                        "description": "Recipient ID",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "rating": {
+                        "description": "rating",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "comment": {
+                        "description": "comment",
+                        "type": "string",
+                        "example": "хороший отзыв"
                     }
                 },
                 "type": "object"
