@@ -83,7 +83,7 @@ class UserResource extends JsonResource
             'role' => $this->role,
             'role_label' => RoleEnum::from($this->role)->label(),
             'description' => $this->description,
-            'locations' => $this->locations[0]->city,
+            'locations' => $this->locations[0]->name,
             'rating' => $this->reveiwWhom->avg('rating')|0,
             // LocationResource::collection( $this->whenLoaded('locations')),
         ];

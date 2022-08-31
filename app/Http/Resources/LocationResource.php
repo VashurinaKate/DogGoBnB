@@ -30,7 +30,7 @@ class LocationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'city' => $this->city,
+            'city' => $this->name,
         ];
     }
 }

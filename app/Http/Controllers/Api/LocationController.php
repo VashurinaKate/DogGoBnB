@@ -41,6 +41,7 @@ class LocationController
         return $this->json->response(
             data: [
             'cities' => LocationResource::collection(Location::all()),
+            // 'cities' => LocationResource::collection(Location::where('to_whom_id', '=', $id)->get()),
         ]);
     }
 

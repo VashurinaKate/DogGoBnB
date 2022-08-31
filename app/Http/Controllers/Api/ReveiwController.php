@@ -142,9 +142,10 @@ class ReveiwController
      */
     public function show($id): \Illuminate\Http\JsonResponse
     {
+        $reviews = Review::where('to_whom_id', '=', $id)->get();
         return $this->json->response( 
             data: [
-            'reviews' => Review::where('to_whom_id', '=', $id)->get()
+            'reviews' => ReviewResource::collection($reviews),
         ]);
     }
 

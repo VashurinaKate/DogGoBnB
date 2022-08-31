@@ -61,7 +61,7 @@ class UserSaveRequest extends BaseApiRequest
             'name' => [Rule::requiredIf($isMethodPost), 'string', 'max:50'],
             'email' => [Rule::requiredIf($isMethodPost), 'email', 'max:50'],
             'phone' => [Rule::requiredIf($isMethodPost), 'string', 'max:12'],
-            // 'role' => [Rule::requiredIf($isMethodPost), 'integer'],
+            'role' => [Rule::requiredIf($isMethodPost), 'integer'],
             // 'locations' =>
             'description' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
         ];
