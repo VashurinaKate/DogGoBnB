@@ -41,8 +41,6 @@ class ReviewResource extends JsonResource
             'to_whom_id' => $this->to_whom_id,
             'rating' => $this->rating,
             'comment' => $this->comment,
-            
-            
             // LocationResource::collection( $this->whenLoaded('locations')),
         ];;
     }

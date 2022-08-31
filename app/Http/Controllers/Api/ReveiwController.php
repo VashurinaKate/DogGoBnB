@@ -42,11 +42,15 @@ class ReveiwController
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        return $this->json->response(
+        $reviews = Review::all();
+        return $this->json->response( 
             data: [
-                'reviews' => Review::all()
-            ]
-        );
+            'reviews' => ReviewResource::collection($reviews),
+        ]);
+        
+        
+        
+        
     }
 
     /**
@@ -104,7 +108,7 @@ class ReveiwController
         Auth::user()->reveiwThat()->save($review);
         return $this->json->response(
             data: [
-                'reviews' => ReviewResource::make($review)
+                'reviews' => $review
                 ]
             );
     }

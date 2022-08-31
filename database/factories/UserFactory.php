@@ -21,6 +21,7 @@ class UserFactory extends Factory
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
+            'img' => 'https://xsgames.co/randomusers/avatar.php?g=male' ,
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => $this->faker->numberBetween(0, 2),
             'description' => fake()->text(100),

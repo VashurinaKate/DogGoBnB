@@ -14,12 +14,7 @@ class ReveiwSaveRequest extends BaseApiRequest
  * @OA\Schema(
  *     schema="ReveiwSaveRequest",
  *     type="object",
- *     @OA\Property(
- *         property="that_id",
- *         type="integer",
- *         description="Ыender ID",
- *         example="3"
- *     ),
+ *     
  *     @OA\Property(
  *         property="to_whom_id",
  *         type="integer",
@@ -45,9 +40,8 @@ class ReveiwSaveRequest extends BaseApiRequest
     {
         $isMethodPost = $this->isMethod('post');
         return [
-            'that_id' => [Rule::requiredIf($isMethodPost), 'int'],
             'to_whom_id' => [Rule::requiredIf($isMethodPost), 'int'],
-            'rating' => [Rule::requiredIf($isMethodPost), 'int', 'max:10'],
+            'rating' => [Rule::requiredIf($isMethodPost), 'int', 'max:5'],
             'comment' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
         ];
     }

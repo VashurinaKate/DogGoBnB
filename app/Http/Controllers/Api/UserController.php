@@ -74,7 +74,7 @@ class UserController
 
         return $this->json->response(data: [
             'users' => UserResource::collection($users),
-            
+            // 'users' => $users
         ]);
     }
 

@@ -81,10 +81,13 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'role' => $this->role,
+            'img' => $this->img,
+            'address'=> $this->address,
             'role_label' => RoleEnum::from($this->role)->label(),
             'description' => $this->description,
             'locations' => $this->locations[0]->name,
             'rating' => $this->reveiwWhom->avg('rating')|0,
+
             // LocationResource::collection( $this->whenLoaded('locations')),
         ];
     }
