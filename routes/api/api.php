@@ -33,7 +33,8 @@ Route::group([
 ], function () {
     Route::apiResource('recipients', UserController::class)
         ->middleware(TransformUserIndexRequest::class);
-    Route::apiResource('locations', LocationController::class);
+    Route::apiResource('locations', LocationController::class)
+        ->middleware(TransformUserIndexRequest::class);;
     Route::apiResource('reviews', ReveiwController::class);
     Route::apiResource('users', UserController::class);
 });

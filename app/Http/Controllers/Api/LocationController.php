@@ -36,12 +36,23 @@ class LocationController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
+        $filters = $request->input('filters');
+        if ($filters) {
+            $location = LocationResource::collection(
+                    Location::with('users')->whereRelation('users', 'id',  '>',0 )->get()
+            )->groupBy('city');
+        } else {
+            $location = LocationResource::collection(Location::all());
+        }
+        
         return $this->json->response(
             data: [
-            'cities' => LocationResource::collection(Location::all()),
+            //  'cities' => LocationResource::collection(Location::all()),
+            //  'cities' => LocationResource::collection($location)->groupBy('city'),
             // 'cities' => LocationResource::collection(Location::where('to_whom_id', '=', $id)->get()),
+            'cities' => $location
         ]);
     }
 
