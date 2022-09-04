@@ -44,7 +44,7 @@ class LocationController
                     Location::with('users')->whereRelation('users', 'id',  '>',0 )->orderBy('name')->groupBy('id')->get()
             );
         } else {
-            $location = LocationResource::collection(Location::all());
+            $location = LocationResource::collection(Location::orderBy('name')->get());
         }
         
         return $this->json->response(
