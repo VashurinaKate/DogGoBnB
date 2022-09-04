@@ -19,21 +19,13 @@ class ReviewUserSeeder extends Seeder
     {
         $users = User::all();
         
-        // Review::all()->each(function ($review) use ($users) {
-        //     $review->reviewsThat()
-        //     ->associate($users->random());
-        //     $review->reviewsWhom()
-        //     ->associate($users->random());
-            
-        // });
-         Review::factory()
-         ->afterMaking(function ($review) use ($users) {
+        Review::factory()
+        ->afterMaking(function ($review) use ($users) {
             $review->reviewsThat()->associate($users->random());
             $review->reviewsWhom()->associate($users->random());
-            
         })
         ->count(30)
-            ->create();
+        ->create();
         
     }
 }

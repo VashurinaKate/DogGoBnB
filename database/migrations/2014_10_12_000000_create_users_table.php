@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->tinyInteger('role')->default(\App\Enums\RoleEnum::GUEST->value);
             $table->string('description')->default('');
             $table->string('address')->nullable();
+            $table->boolean('otherAnimals')->default(false);
             $table->timestamps();
         });
     }

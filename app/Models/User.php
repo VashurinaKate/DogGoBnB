@@ -130,4 +130,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class, 'to_whom_id', 'id');
     }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function petSize(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Petsize::class);
+    }
 }
