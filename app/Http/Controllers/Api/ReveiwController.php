@@ -161,9 +161,14 @@ class ReveiwController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id): \Illuminate\Http\JsonResponse
+    public function update(ReveiwSaveRequest $request, Review $review): \Illuminate\Http\JsonResponse
     {
-        return $this->json->response([]);
+        $review = new Review($request->validated());
+        // $review->update($request);
+        Auth::user()->reveiwThat()->update($request->validated());
+        return $this->json->response(data: [
+             'reviews' => $review,
+        ]);
     }
 
     /**

@@ -15,6 +15,6 @@ class PetSizeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return $this->pet_size ;
+        return $this->pet_size;
     }
 }

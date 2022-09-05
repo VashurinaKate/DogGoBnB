@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 use App\Contracts\ResponseContract;
 
 use App\Http\Resources\UserResource;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController
@@ -18,7 +18,6 @@ class UserController
     public function __construct(public ResponseContract $json)
     {
     }
-
     /**
      * @OA\Get(
      *     path="/users",
@@ -52,8 +51,7 @@ class UserController
      *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
      *     )
      * )
-     *
-     * @param \Illuminate\Http\Request $request
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -76,6 +74,18 @@ class UserController
             'users' => UserResource::collection($users),
             // 'users' => $users
         ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->json->response([]);
     }
 
     /**
@@ -145,12 +155,27 @@ class UserController
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    //UserSaveRequest
     public function update(UserSaveRequest $request, User $user): \Illuminate\Http\JsonResponse
     {
-        $user->update($request->validated());
-
+        $usernew = $request->all();
+        Auth::user()->update($request->validated());
+        Auth::user()->locations()->sync([$usernew['locations']]);
+        Auth::user()->petSize()->sync($usernew['petSize']);
         return $this->json->response(data: [
-            'user' => UserResource::make($user),
+            'user' => UserResource::make(Auth::user()),
         ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id): \Illuminate\Http\JsonResponse
+    {
+        return $this->json->response([]);
     }
 }

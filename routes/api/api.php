@@ -6,6 +6,7 @@ use App\Http\Middleware\TransformUserIndexRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\Api\{
     AnimalController, 
     OrderController, 
@@ -13,7 +14,7 @@ use App\Http\Controllers\Api\{
     LocationController, 
     ReveiwController
 };
-
+use App\Http\Resources\UserResource;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,8 +27,9 @@ use App\Http\Controllers\Api\{
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 });
+
 Route::group([
     'prefix' => 'v1',
 ], function () {
@@ -51,5 +53,7 @@ Route::group([
         ->middleware(CheckOrderBelongsUser::class);
     // Route::apiResource('users', UserController::class);
     Route::apiResource('reviewsave', ReveiwController::class);
+    Route::apiResource('usersave', UserController::class);
+    
 });
 

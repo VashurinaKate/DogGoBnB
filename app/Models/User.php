@@ -29,7 +29,9 @@ class User extends Authenticatable
         'role',
         'password',
         'description',
-        'phone'
+        'address',
+        'img',
+        'otherAnimals'
     ];
 
     /**

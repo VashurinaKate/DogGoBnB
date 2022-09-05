@@ -14,14 +14,14 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();;
+            $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->string('phone')->unique()->nullable();;
+            $table->string('phone')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('img')->nullable();;
             $table->string('password');
             $table->tinyInteger('role')->default(\App\Enums\RoleEnum::GUEST->value);
-            $table->string('description')->default('');
+            $table->string('description')->nullable()->default('');
             $table->string('address')->nullable();
             $table->boolean('otherAnimals')->default(false);
             $table->timestamps();

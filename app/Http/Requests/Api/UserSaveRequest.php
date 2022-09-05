@@ -55,15 +55,18 @@ class UserSaveRequest extends BaseApiRequest
 {
     public function rules(): array
     {
-        $isMethodPost = $this->isMethod('post');
+        $isMethodPut = $this->isMethod('put');
 
         return [
-            'name' => [Rule::requiredIf($isMethodPost), 'string', 'max:50'],
-            'email' => [Rule::requiredIf($isMethodPost), 'email', 'max:50'],
-            'phone' => [Rule::requiredIf($isMethodPost), 'string', 'max:12'],
-            'role' => [Rule::requiredIf($isMethodPost), 'integer'],
-            // 'locations' =>
-            'description' => [Rule::requiredIf($isMethodPost), 'string', 'max:1000'],
+            'name' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
+            'email' => [Rule::requiredIf($isMethodPut), 'email', 'max:50'],
+            'phone' => [Rule::requiredIf($isMethodPut), 'string', 'max:12'],
+            'role' => [Rule::requiredIf($isMethodPut), 'integer'],
+            'description' => [Rule::requiredIf($isMethodPut), 'string'],
+            'address' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
+            'img' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
+            'otherAnimals' => [Rule::requiredIf($isMethodPut), 'integer','max:1']
+            
         ];
     }
 }
