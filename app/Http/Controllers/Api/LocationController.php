@@ -41,7 +41,7 @@ class LocationController
         $filters = $request->input('filters');
         if ($filters) {
             $location = LocationResource::collection(
-                    Location::with('users')->whereRelation('users', 'id',  '>',0 )->orderBy('name')->groupBy('id')->get()
+                Location::with('users')->whereRelation('users', 'role',  '=',2 )->orderBy('name')->groupBy('id')->get()
             );
         } else {
             $location = LocationResource::collection(Location::orderBy('name')->get());
