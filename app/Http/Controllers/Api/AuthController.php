@@ -119,13 +119,15 @@ class AuthController
     public function login(AuthRequest $request): \Illuminate\Http\JsonResponse
     {
         $user = User::firstWhere('email', $request->input('email'));
-        if (!$user && \Hash::check($request->input('password'), $user->password)) {
-            return $this->json->response([], 'Credentials not match', JsonResponse::HTTP_UNAUTHORIZED);
-        }
+        if ($user && \Hash::check($request->input('password'), $user->password)) {
+            return $this->json->response([
+                'token' => $user->createToken('api_token')->plainTextToken,
+            ]);
 
-        return $this->json->response([
-            'token' => $user->createToken('api_token')->plainTextToken,
-        ]);
+        }
+        return $this->json->response([], 'Credentials not match', JsonResponse::HTTP_UNAUTHORIZED);
+
+        
     }
 
     /**
