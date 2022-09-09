@@ -58,36 +58,30 @@ class UserController
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $filters = $request->input('filters');
-        // $users = User::query()
-        //     ->when($filters, function (Builder $query) use ($filters) {
-        //         $query
-        //     })
-        // ;
-
-       
-           
-        if (array_key_exists('city_id', $filters) && array_key_exists('pet_size', $filters)){
-            $users = User::with('locations','petSize')
-                ->whereRelation('locations','id', $filters['city_id'])
-                ->whereRelation('petSize', 'id', $filters['pet_size'])
-                ->get();  
-        } else if (array_key_exists('city_id', $filters)){
-            $users = User::with('locations')
-                ->whereRelation('locations','id', $filters['city_id'])
-                ->get();  
-        } else if (array_key_exists('pet_size', $filters)){
-            $users = User::with('petSize')
-                ->whereRelation('petSize', 'id', $filters['pet_size'])
-                ->get(); 
+               
+        if ($filters) {  
+            if (array_key_exists('city_id', $filters) && array_key_exists('pet_size', $filters)){
+                $users = User::with('locations','petSize')
+                    ->whereRelation('locations','id', $filters['city_id'])
+                    ->whereRelation('petSize', 'id', $filters['pet_size'])
+                    ->get();  
+            } else if (array_key_exists('city_id', $filters)){
+                $users = User::with('locations')
+                    ->whereRelation('locations','id', $filters['city_id'])
+                    ->get();  
+            } else if (array_key_exists('pet_size', $filters)){
+                $users = User::with('petSize')
+                    ->whereRelation('petSize', 'id', $filters['pet_size'])
+                    ->get(); 
+            } else {
+                $users = User::with('locations')->whereRelation('locations', 'id','>',0)->get();
+            }
         } else {
             $users = User::with('locations')->whereRelation('locations', 'id','>',0)->get();
         }
 
         return $this->json->response(data: [
-            'filters' =>  $filters,
             'users' => UserResource::collection($users),
-            
-            // 'users' => $users
         ]);
     }
 
