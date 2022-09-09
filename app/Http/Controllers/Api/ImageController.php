@@ -26,6 +26,7 @@ class ImageController extends Controller
         ]);
 
         $image = $request->file(key: 'image')->storePublicly(path: 'public/images');
+        $image = substr_replace($image, 'storage', 0, 6);
         Auth::user()->update(['img'=>$image]);
         //  $image =$request->file(key: 'image')->store('uploads', 'public');
         return $this->json->response(data: [
