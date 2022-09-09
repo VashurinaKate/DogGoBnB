@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Middleware\CheckOrderBelongsUser;
-
 use App\Http\Middleware\TransformUserIndexRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +11,8 @@ use App\Http\Controllers\Api\{
     OrderController, 
     UserController, 
     LocationController, 
-    ReveiwController
+    ReveiwController,
+    ImageController
 };
 use App\Http\Resources\UserResource;
 /*
@@ -39,6 +39,7 @@ Route::group([
         ->middleware(TransformUserIndexRequest::class);;
     Route::apiResource('reviews', ReveiwController::class);
     Route::apiResource('users', UserController::class);
+    // Route::post('image/save', [ImageController::class, 'index']);
 });
 
 Route::group([
@@ -54,6 +55,7 @@ Route::group([
     // Route::apiResource('users', UserController::class);
     Route::apiResource('reviewsave', ReveiwController::class);
     Route::apiResource('usersave', UserController::class);
+    Route::post('image/save', [ImageController::class, 'index']);
     
 });
 
