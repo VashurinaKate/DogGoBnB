@@ -58,15 +58,14 @@ class UserSaveRequest extends BaseApiRequest
         $isMethodPut = $this->isMethod('put');
 
         return [
-            'name' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
+            'name' => ['string', 'max:50', 'nullable'],
             'email' => [Rule::requiredIf($isMethodPut), 'email', 'max:50'],
-            'phone' => [Rule::requiredIf($isMethodPut), 'string', 'max:12'],
+            'phone' => ['string', 'max:12', 'nullable'],
             'role' => [Rule::requiredIf($isMethodPut), 'integer'],
-            'description' => [Rule::requiredIf($isMethodPut), 'string'],
-            'address' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
-            'img' => [Rule::requiredIf($isMethodPut), 'string', 'max:50'],
+            'description' => ['string', 'min:1', 'nullable'],
+            'address' => ['string', 'max:50', 'nullable'],
+            'img' => [ 'string', 'max:50', 'nullable'],
             'otherAnimals' => [Rule::requiredIf($isMethodPut), 'integer','max:1']
-            
         ];
     }
 }
