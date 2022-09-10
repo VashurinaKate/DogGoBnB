@@ -79,7 +79,7 @@ class UserController
         } else {
             $users = User::with('locations')->whereRelation('locations', 'id','>',0)->get();
         }
-
+        $users = $users->where('role','=', 2);
         return $this->json->response(data: [
             'users' => UserResource::collection($users),
         ]);
