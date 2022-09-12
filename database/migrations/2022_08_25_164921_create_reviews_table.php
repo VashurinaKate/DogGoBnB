@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('that_id')->index()->constrained('users');
             $table->foreignId('to_whom_id')->index()->constrained('users');
-            $table->integer('rating');
+            $table->float('rating',2);
             $table->string('comment');
             $table->timestamps();
         });
