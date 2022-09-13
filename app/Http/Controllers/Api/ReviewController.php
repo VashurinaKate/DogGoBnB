@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\ReveiwSaveRequest;
 use App\Contracts\ResponseContract;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Annotations as OA;
 
 use App\Models\Review;
 use App\Http\Resources\ReviewResource;
-class ReveiwController
+
+class ReviewController
 {
     public function __construct(public ResponseContract $json)
     {
     }
+
     /**
      * @OA\Get(
      *     path="/reviews",
@@ -29,9 +30,8 @@ class ReveiwController
      *         @OA\JsonContent(ref="#/components/schemas/ReviewResource")
      *     )
      * )
-     * 
-     * 
-     *     @OA\Response(
+     *
+     * @OA\Response(
      *         response=200,
      *         description="OK",
      *         @OA\JsonContent(ref="#/components/schemas/ReviewResource"),
@@ -42,79 +42,64 @@ class ReveiwController
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $reviews = Review::all();
-        return $this->json->response( 
-            data: [
-            'reviews' => ReviewResource::collection($reviews),
-        ]);
-        
-        
-        
-        
+        return $this->json->response(['reviews' => ReviewResource::collection(Review::all())]);
     }
 
     /**
-    * @OA\Post(
-    *     path="/reviewsave",
-    *     security={{ "sanctum": {"*"} }},
-    *     operationId="review store",
-    *     tags={"Reviews"},
-    *     summary="reviews store",
-    *     @OA\RequestBody(
-    *         @OA\MediaType(
-    *             mediaType="application/json",
-    *             @OA\Schema(ref="#/components/schemas/ReveiwSaveRequest"),
-    *         ),
-    *     ),
-    *     @OA\Response(
-    *         response=200,
-    *         description="OK",
-    *         @OA\JsonContent(
-    *         @OA\Property(
-    *           property="to_whom_id",
-    *           type="integer",
-    *           description="Recipient ID",
-    *           example="3"
-    *         ),
-    *         @OA\Property(
-    *           property="rating",
-    *           type="integer",
-    *           description="rating",
-    *           example="3"
-    *          ),
-    *         @OA\Property(
-    *           property="comment",
-    *           type="string",
-    *           description="comment",
-    *           example="хороший отзыв"
-    *          ),
-    *         ),
-    *     )
-    * )
-    * Store a newly created resource in storage.
-    *
-    * @param \Illuminate\Http\Request $request
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
+     * @OA\Post(
+     *     path="/reviewsave",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="review store",
+     *     tags={"Reviews"},
+     *     summary="reviews store",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(ref="#/components/schemas/ReveiwSaveRequest"),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *         @OA\Property(
+     *           property="to_whom_id",
+     *           type="integer",
+     *           description="Recipient ID",
+     *           example="3"
+     *         ),
+     *         @OA\Property(
+     *           property="rating",
+     *           type="integer",
+     *           description="rating",
+     *           example="3"
+     *          ),
+     *         @OA\Property(
+     *           property="comment",
+     *           type="string",
+     *           description="comment",
+     *           example="хороший отзыв"
+     *          ),
+     *         ),
+     *     )
+     * )
+     * Store a newly created resource in storage.
+     *
+     * @param ReveiwSaveRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(ReveiwSaveRequest $request): \Illuminate\Http\JsonResponse
     {
-        
-        
         // $created_reviews = Review::create($request->validated());
-        
         $review = new Review($request->validated());
-        
-        Auth::user()->reveiwThat()->save($review);
-        return $this->json->response(
-            data: [
-                'reviews' => $review
-                ]
-            );
+        Auth::user()->reviewThat()->save($review);
+
+        return $this->json->response(['reviews' => $review]);
     }
 
     /**
-     *  @OA\Get(
+     * @OA\Get(
      *     path="/reviews/{id}",
      *     security={{ "sanctum": {"*"} }},
      *     operationId="reviews profile show",
@@ -127,37 +112,32 @@ class ReveiwController
      *         required=true,
      *         @OA\Schema(type="integer"),
      *     ),
-     *      
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OK",
      *         @OA\JsonContent(ref="#/components/schemas/ReviewResource")
      *     )
      * )
-     * 
-     * 
-     *    
-     * )
+     *
      * Display the specified resource.
      *
      * @param int $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id): \Illuminate\Http\JsonResponse
+    public function show(int $id): \Illuminate\Http\JsonResponse
     {
         $reviews = Review::where('to_whom_id', '=', $id)->get();
-        return $this->json->response( 
-            data: [
-            'reviews' => ReviewResource::collection($reviews),
-        ]);
+
+        return $this->json->response(['reviews' => ReviewResource::collection($reviews)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int  $id
+     * @param ReveiwSaveRequest $request
+     * @param Review $review
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -165,10 +145,10 @@ class ReveiwController
     {
         $review = new Review($request->validated());
         // $review->update($request);
-        Auth::user()->reveiwThat()->update($request->validated());
-        return $this->json->response(data: [
-             'reviews' => $review,
-        ]);
+        // fixme: ???
+        Auth::user()->reviewThat()->update($request->validated());
+
+        return $this->json->response(['reviews' => $review]);
     }
 
     /**
@@ -178,7 +158,7 @@ class ReveiwController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse
+    public function destroy(int $id): \Illuminate\Http\JsonResponse
     {
         return $this->json->response([]);
     }

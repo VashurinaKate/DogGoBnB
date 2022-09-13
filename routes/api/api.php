@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Api\{
-    AnimalController, 
-    OrderController, 
-    UserController, 
-    LocationController, 
-    ReveiwController,
+    AnimalController,
+    OrderController,
+    UserController,
+    LocationController,
+    ReviewController,
     ImageController
 };
 use App\Http\Resources\UserResource;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,7 +38,7 @@ Route::group([
         ->middleware(TransformUserIndexRequest::class);
     Route::apiResource('locations', LocationController::class)
         ->middleware(TransformUserIndexRequest::class);;
-    Route::apiResource('reviews', ReveiwController::class);
+    Route::apiResource('reviews', ReviewController::class);
     Route::apiResource('users', UserController::class);
     // Route::post('image/save', [ImageController::class, 'index']);
 });
@@ -53,9 +54,8 @@ Route::group([
         ->except(['index', 'store'])
         ->middleware(CheckOrderBelongsUser::class);
     // Route::apiResource('users', UserController::class);
-    Route::apiResource('reviewsave', ReveiwController::class);
+    Route::apiResource('reviewsave', ReviewController::class);
     Route::apiResource('usersave', UserController::class);
     Route::post('image/save', [ImageController::class, 'index']);
-    
 });
 

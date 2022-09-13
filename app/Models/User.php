@@ -31,7 +31,7 @@ class User extends Authenticatable
         'description',
         'address',
         'img',
-        'otherAnimals'
+        'otherAnimals',
     ];
 
     /**
@@ -117,21 +117,23 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Location::class);
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reveiwThat(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function reviewThat(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Review::class, 'that_id', 'id');
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function reveiwWhom(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function reviewWhom(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Review::class, 'to_whom_id', 'id');
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
