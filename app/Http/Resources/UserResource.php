@@ -86,11 +86,11 @@ class UserResource extends JsonResource
             'address'=> $this->address,
             'role_label' => RoleEnum::from($this->role)->label(),
             'description' => $this->description,
-            'locations' => count($this->locations)>0 ? $this->locations[0]->name : '',
-            'rating' => $this->reveiwWhom->avg('rating')|0,
+            'locations' => $this->locations->isNotEmpty() ? $this->locations->first()->name : '',
+            'rating' => $this->reveiwWhom->isNotEmpty() ? round($this->reveiwWhom->avg('rating'), 1) : 0,
             'otherAnimals' => $this->otherAnimals,
-            'petSize' => $this->petSize? PetSizeResource::collection($this->petSize) : []
-            // LocationResource::collection( $this->whenLoaded('locations')),
+            'petSize' => $this->petSize? PetSizeResource::collection($this->petSize) : [],
+            'number_reviews' => $this->reveiwWhom->isNotEmpty() ? $this->reveiwWhom->count('rating') : 0,
         ];
     }
 }
