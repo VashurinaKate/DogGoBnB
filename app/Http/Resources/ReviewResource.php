@@ -37,7 +37,7 @@ class ReviewResource extends JsonResource
         return [
             'id' => $this->id,
             'that_id' => $this->that_id,
-            'that_name' => $this->reviewsThat->name,
+            'that_name' => $this->reviewsThat == null ? 'неизвестный' : $this->reviewsThat->name,
             'to_whom_id' => $this->to_whom_id,
             'rating' => $this->rating,
             'comment' => $this->comment,
