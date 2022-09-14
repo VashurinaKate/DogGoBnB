@@ -12,7 +12,7 @@ use App\Contracts\ResponseContract;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Storage;
 class UserController
 {
     public function __construct(public ResponseContract $json)
@@ -183,8 +183,17 @@ class UserController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): \Illuminate\Http\JsonResponse
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
-        return $this->json->response([]);
+        $users = Auth::user();
+        $users->img !== null ? Storage::delete($users->img) : 0;
+        //$users->reveiwThat->isNotEmpty() ? $users->reveiwThat()->delete() : 0;
+        $users->reveiwWhom->isNotEmpty() ? $users->reveiwWhom()->delete() : 0;
+        $users->locations->isNotEmpty() ? $users->locations()->detach() : 0;
+        $users->petSize->isNotEmpty() ? $users->petSize()->detach() : 0;
+        $users->delete();
+        return $this->json->response(data: [
+            null,
+        ]);
     }
 }
