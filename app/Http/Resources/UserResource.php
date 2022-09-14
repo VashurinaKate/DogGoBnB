@@ -89,8 +89,8 @@ class UserResource extends JsonResource
             'locations' => $this->locations->isNotEmpty() ? $this->locations->first()->name : '',
             'rating' => $this->reveiwWhom->isNotEmpty() ? round($this->reveiwWhom->avg('rating'), 1) : 0,
             'otherAnimals' => $this->otherAnimals,
-            'petSize' => $this->petSize? PetSizeResource::collection($this->petSize) : [],
-            'number_reviews' => $this->reveiwWhom->isNotEmpty() ? $this->reveiwWhom->count('rating') : 0,
+            'petSize' => $this->petSize ? PetSizeResource::collection($this->petSize) : [],
+            'numberReviews' => $this->reveiwWhom->isNotEmpty() ? $this->reveiwWhom->count('rating') : 0,
         ];
     }
 }
