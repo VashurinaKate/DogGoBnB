@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use OpenApi\Annotations as OA;
 
 use App\Http\Requests\Api\AuthRequest;
-
+use App\Http\Requests\Api\PasswordRequest;
 use App\Contracts\ResponseContract;
-
+use Illuminate\Http\Request;
 use App\Models\User;
 
 class AuthController
@@ -165,4 +165,22 @@ class AuthController
 
         return $this->json->response([], 'Logged out');
     }
+    /*
+    * @return \Illuminate\Http\JsonResponse
+    */
+   public function password(PasswordRequest $request): \Illuminate\Http\JsonResponse
+   {
+        // $user = User::firstWhere('email', $request->input('password'));
+        $user = Auth::user();
+        if ($user && \Hash::check($request->input('old_password'), $user->password)) {
+            $user->password = $request->input('password');
+            $user->save();
+            return $this->json->response([], 'password has been successfully changed');
+
+        } else {
+            return $this->json->response([], 'invalid password');
+        }
+
+        
+   }
 }
