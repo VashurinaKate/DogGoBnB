@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Contracts\ResponseContract;
 
-class ImagesController
+class ImagesController extends Controller
 {
     public function __construct(public ResponseContract $json)
     {
@@ -35,22 +36,25 @@ class ImagesController
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        // $this->validate($request, [
-        //     // 'content' => 'required',
-        //     'image' => 'required|mimes:jpeg,jpg'
-        //     // 'image' => 'required|mimes:jpeg|dimensions:min_width=1000,min_height=400'
-        // ]);
-
-        $image = $request->file(key: 'image')->storePublicly(path: 'public/images');
-        $image = substr_replace($image, 'storage', 0, 6);
-        //Auth::user()->update(['img'=>$image]);
+        $img = Auth::user()->img;
+        if ($img !== null) {
+            $img = substr_replace($img, '', 0, 8);
+            $imgPrizn = Storage::disk('public')->exists($img);
+            if ( $imgPrizn ) {
+                Storage::disk('public')->delete($img);
+                Auth::user()->update(['img' => null]);
+            }
+        }
+        if (($request->file(key: 'image') !== null) && ($request->file(key: 'image') !== '')) {
+            $image = $request->file(key: 'image')->storePublicly(path: 'public/images');
+            $image = substr_replace($image, 'storage', 0, 6);
+            Auth::user()->update(['img' => $image]);
         //  $image =$request->file(key: 'image')->store('uploads', 'public');
+        }
         return $this->json->response(
             data: [
-            //'image' =>  Auth::user()->img,
-            'image' => $image,
-            // '$request' => $request->all(),
-            // 'user' => Auth::user(),
+                'image' =>  Auth::user()->img,
+                'ghg' => $request->file(key: 'image'),
             ]
         );
     }
