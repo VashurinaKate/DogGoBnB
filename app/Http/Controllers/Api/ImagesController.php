@@ -36,6 +36,9 @@ class ImagesController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
+        $this->validate($request, [
+            'image' => 'required|mimes:jpeg,jpg'
+        ]);
         $img = Auth::user()->img;
         if ($img !== null) {
             $img = substr_replace($img, '', 0, 8);
@@ -54,7 +57,6 @@ class ImagesController extends Controller
         return $this->json->response(
             data: [
                 'image' =>  Auth::user()->img,
-                'ghg' => $request->file(key: 'image'),
             ]
         );
     }

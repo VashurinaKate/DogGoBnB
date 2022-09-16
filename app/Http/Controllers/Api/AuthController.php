@@ -175,10 +175,16 @@ class AuthController
         if ($user && \Hash::check($request->input('old_password'), $user->password)) {
             $user->password = $request->input('password');
             $user->save();
-            return $this->json->response([], 'password has been successfully changed');
+            return $this->json->response([], 'пароль был успешно изменен');
 
         } else {
-            return $this->json->response([], 'invalid password');
+            return $this->json->error( 'пароль указан неверный', 401, ['old_password' => 'пароль указан неверный']);
+            // return $this->json->response(array(
+            //     'code'      =>  401,
+            //     'message'   =>  'invalid password'
+            // ), 401);
+            
+        
         }
 
         

@@ -40,7 +40,7 @@ abstract class BaseApiRequest extends FormRequest
         $errors = (new ValidationException($validator))->errors();
         $message = (method_exists($this, 'message'))
             ? $this->container->call([$this, 'message'])
-            : 'The given data was invalid.';
+            : 'Указанные данные были недействительными.';
         if ($validator->fails()) {
             $message = $validator->errors()->first();
         }
