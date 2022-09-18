@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\{
     OrderController, 
     UserController, 
     LocationController, 
-    ReveiwController,
+    ReviewController,
     ImageController
 };
 use App\Http\Resources\UserResource;
@@ -56,7 +56,7 @@ Route::group([
     // Route::apiResource('users', UserController::class);
     Route::apiResource('reviewsave', ReviewController::class);
     Route::apiResource('usersave', UserController::class);
-    Route::post('image/save', [ImageController::class, 'index']);
+    Route::post('image/save', ImagesController::class);
     
 });
 

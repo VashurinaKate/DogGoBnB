@@ -117,7 +117,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Location::class);
     }
-
+    
+    public function locationsFilter($id): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Location::class)
+            ->wherePivot('location_id', $id);
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
