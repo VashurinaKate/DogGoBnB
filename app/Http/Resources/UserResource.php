@@ -8,7 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Enums\RoleEnum;
 use OpenApi\Annotations as OA;
 
-use App\Http\Resources\PetSizeResource;
 /**
  * @mixin \App\Models\User
  *
@@ -83,7 +82,7 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'role' => $this->role,
             'img' => $this->img,
-            'address'=> $this->address,
+            'address' => $this->address,
             'role_label' => RoleEnum::from($this->role)->label(),
             'description' => $this->description,
             'locations' => $this->locations->isNotEmpty() ? $this->locations->first()->name : '',
