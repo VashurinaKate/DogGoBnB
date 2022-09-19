@@ -36,12 +36,38 @@ class UserController
      *     path="/recipients?filters[city_id]=id",
      *     security={{ "sanctum": {"*"} }},
      *     operationId="users show",
-     *     tags={"recipients"},
+     *     tags={"Recipients"},
      *     summary="Get  recipients filters[city_id]",
      *     @OA\Parameter(
      *         description="recipients ID",
      *         in="path",
      *         name="filters[city_id]",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
+     *     )
+     * )
+     * @OA\Get(
+     *     path="/recipients?filters[city_id]=id&filters['pet_size']=id",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="users showy",
+     *     tags={"Recipients"},
+     *     summary="Get  recipients filters[city_id]&filters['pet_size']=id",
+     *     @OA\Parameter(
+     *         description="recipients ID",
+     *         in="path",
+     *         name="filters[city_id]",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *     @OA\Parameter(
+     *         description="recipients ID",
+     *         in="path",
+     *         name="filters[pet_size]",
      *         required=true,
      *         @OA\Schema(type="integer"),
      *     ),
@@ -177,6 +203,25 @@ class UserController
     }
 
     /**
+     * @OA\Delete(
+     *     path="/usersave/{id}",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="destroy user profile",
+     *     tags={"Users"},
+     *     summary="Delete user profile",
+     *     @OA\Parameter(
+     *         description="User ID",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *     ), 
+     *     @OA\Response(
+     *         response=200,
+     *         description="null",
+     *        
+     *     )
+     * )
      * Remove the specified resource from storage.
      *
      * @param int $id
@@ -188,7 +233,7 @@ class UserController
         $users = Auth::user();
         $users->img !== null ? Storage::delete($users->img) : 0;
         //$users->reveiwThat->isNotEmpty() ? $users->reveiwThat()->delete() : 0;
-        $users->reveiwWhom->isNotEmpty() ? $users->reviewWhom()->delete() : 0;
+        $users->reviewWhom->isNotEmpty() ? $users->reviewWhom()->delete() : 0;
         $users->locations->isNotEmpty() ? $users->locations()->detach() : 0;
         $users->petSize->isNotEmpty() ? $users->petSize()->detach() : 0;
         $users->delete();

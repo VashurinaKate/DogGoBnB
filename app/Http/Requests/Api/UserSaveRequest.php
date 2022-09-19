@@ -38,16 +38,40 @@ use OpenApi\Annotations as OA;
  *         example="1"
  *     ),
  *     @OA\Property(
- *         property="role_label",
- *         type="string",
- *         description="User role label",
- *         example="Владелец"
- *     ),
- *     @OA\Property(
  *         property="description",
  *         type="string",
  *         description="Description",
  *         example="Quae sed ut debitis. Fuga nihil provident iure. Inventore et est et est aut odio."
+ *      ),
+ *      @OA\Property(
+ *         property="address",
+ *         type="string",
+ *         description="User address",
+ *         example="Лесная 13 д.12"
+ *      ),
+ *      @OA\Property(
+ *         property="img",
+ *         type="string",
+ *         description="User img",
+ *         example="storage/images/L71A7fXs9iffn4J0YxqDnABxkXC11ZfoPrBe38wV.jpg"
+ *      ),
+ *      @OA\Property(
+ *         property="otherAnimals",
+ *         type="integer",
+ *         description="User otherAnimals",
+ *         example="1"
+ *      ),
+ *      @OA\Property(
+ *         property="locations",
+ *         type="integer",
+ *         description="User locations index",
+ *         example="22"
+ *      ),
+ *      @OA\Property(
+ *         property="petSize",
+ *         type="integer",
+ *         description="User role index",
+ *         example="[1,2]"
  *      ),
  * )
  */

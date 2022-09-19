@@ -15,7 +15,7 @@ use OpenApi\Annotations as OA;
  * )
  * @OA\Server(
  *     description="PMO server",
- *     url="http://localhost/api/v1"
+ *     url="http://l7933yx2.beget.tech//api/v1"
  * )
  * @OA\PathItem(path="/api/v1")
  *

@@ -28,6 +28,33 @@ class ImagesController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *     path="/image/save?image=fghfghfghfghfgh.jpg",
+     *     security={{ "sanctum": {"*"} }},
+     *     operationId="image store",
+     *     tags={"Image"},
+     *     summary="image store",
+     *     @OA\Parameter(
+     *         description="Image ",
+     *         in="path",
+     *         name="image",
+     *         required=true,
+     *         @OA\Schema(type="file"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="to_whom_id",
+     *                  type="integer",
+     *                  description="Recipient ID",
+     *                  example="3"
+     *              ),
+     *         
+     *         ),
+     *     )
+     * )
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request

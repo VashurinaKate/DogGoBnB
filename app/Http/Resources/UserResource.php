@@ -62,6 +62,42 @@ use OpenApi\Annotations as OA;
  *         description="User description",
  *         example="Санкт-Петербург"
  *     ),
+ *     @OA\Property(
+ *         property="img",
+ *         type="string",
+ *         description="User img",
+ *         example="storage/images/wJgppdUPdFgoopOill5WuOISB9Xrs2T7sIs9AXD0.jpg"
+ *     ),
+ *     @OA\Property(
+ *         property="address",
+ *         type="string",
+ *         description="User address",
+ *         example="Синерецкая 10 д.12"
+ *     ),
+ *     @OA\Property(
+ *         property="rating",
+ *         type="string",
+ *         description="User rating",
+ *         example="4,5"
+ *     ),
+ *     @OA\Property(
+ *         property="otherAnimals",
+ *         type="integer",
+ *         description="User otherAnimals",
+ *         example="1"
+ *     ),
+ *     @OA\Property(
+ *         property="petSize",
+ *         type="integer",
+ *         description="petSize",
+ *         example="['mini']"
+ *     ),
+ *     @OA\Property(
+ *         property="numberReviews",
+ *         type="integer",
+ *         description="numberReviews",
+ *         example="0"
+ *     ),
  * )
  */
 class UserResource extends JsonResource
